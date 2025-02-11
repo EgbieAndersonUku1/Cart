@@ -1,4 +1,4 @@
-# Cart System (In progress)
+# Cart System
 
 ## Overview
 
