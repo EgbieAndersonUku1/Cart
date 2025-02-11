@@ -2,28 +2,14 @@
 
 ## Overview
 
-This project is a minimal cart system designed to handle backend interactions using JavaScript, Django and Python and how to communicate with the backend via the Fetch API. The goal for this is to focus on the core functionality of managing cart items without building a full e-commerce application, hence which is why the cart page is only built.
-
-
-## Key Areas of Exploration
-
-As well as processing orders from the cart, this project also explores the security risks in the interaction between the frontend and backend. A key principle in web development is never to trust data from the frontend, as it can easily be manipulated before being sent to the backend.
-
-For example, imagine a user adds a single item to their cart priced at £9.99. If they manipulate the frontend to show five items at the same price, the backend may process the order incorrectly. Instead of paying £49.95 (5 × £9.99), the user could end up paying just £9.99.
-
-To prevent this, the backend must validate cart data before processing payments. The backend should ensure correct prices and quantities are applied by checking data against the database. Token-based authentication (e.g., JWT or CSRF protection) can also help prevent unauthorised changes to the cart.
-
-Other common attack scenarios include tampering with discount codes or altering request payloads. This project aims to explore these vulnerabilities and implement best practices for secure cart management.
-
+This project is a minimal cart system designed to handle frontend interactions using JavaScript and communicate with the backend via the Fetch API. The goal for this is to focus on the core functionality of managing cart items without building a full e-commerce application, hence which is why the cart page is only built.
 
 ## Features
 
-- **Backend Handling**: JavaScript dynamically updates the cart when items are added, saved, or removed.
+- **Frontend Handling**: JavaScript dynamically updates the cart when items are added, saved, or removed.
 - **Fetch API Integration**: The system sends cart data to the backend for processing.
 - **Preloaded Items**: The cart starts with two dummy products for demonstration purposes.
 - **Minimal Backend Dependency**: The backend receives and processes cart updates but does not include a full application structure.
-- **Discount**: Allowing a user to add a code which then decrease the price of the item providing the code is valid
-- **Process**: Processing the order once it is correct
 
 ## Project Structure
 
@@ -35,8 +21,8 @@ Other common attack scenarios include tampering with discount codes or altering 
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/EgbieAndersonUku1/cart_backend.git .
-   cd cart_backend
+   git clone https://github.com/EgbieAndersonUku1/Cart.git 
+   cd cart
    ```
 2. Open `index.html` in a browser to interact with the cart.
 
