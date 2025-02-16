@@ -7,11 +7,13 @@ import { modifyGridAndCenterContent,
         } from "./cart-visuals..js";
 
 import { handleSaveSidebar } from "./sidebar.js";
+import { applyDashToInput, discountManager, extractDiscountCodeFromForm } from "./handle-discount-form.js";
 import   getCartProductInfo from "./product.js";
 import { cardsContainer, createProductCard } from "./components.js";
 
 import { checkIfHTMLElement,
         concatenateWithDelimiter,
+        extractCurrencyAndValue,
         showPopup, 
         toggleSpinner,
         } from "./utils.js";
@@ -23,6 +25,8 @@ const priceTax            = document.getElementById("price-tax");
 const priceTotal          = document.getElementById("price-total");
 const shippingAndHandling = document.getElementById("shipping-and-handling");
 const spinner             = document.getElementById("spinner");
+const discountForm        = document.getElementById("apply-form");
+const discountInputField  = document.getElementById("apply-input");
 
 
 let   priceElementsArray  = Array.from(document.querySelectorAll(".product-price"));
@@ -34,11 +38,12 @@ const PRODUCT_STORAGE_KEY = "products";
 validatePageElements();
 
 
+
 // EventListeners
 document.addEventListener("DOMContentLoaded", () => {handleLocalStorageLoad(PRODUCT_STORAGE_KEY);});
 window.addEventListener("beforeunload", handleBeforeUnload);
 window.addEventListener("click", handleEventDelegeation);
-
+window.addEventListener("input", handleEventDelegeation); 
 
 function handleBeforeUnload() {
   
@@ -76,7 +81,7 @@ function handleLocalStorageLoad(key) {
     if (!products) return;
 
     if (!Array.isArray(products) || products.length == 0) {
-        console.warn(`The product is either not an array or it is empty: Got TypeL ${(typeof products)}, value: ${products}`);
+        window.location.reload();
         return;
     };
 
@@ -105,6 +110,7 @@ function handleLocalStorageLoad(key) {
         
         }
     })
+   
 }
 
 
@@ -117,21 +123,38 @@ function handleEventDelegeation(e) {
     const classList          = e.target.classList;
     const actionType         = classList.contains("increase-quantity") ? "increase-quantity": classList.contains("decrease-quantity") ? "decrease-quantity": null;
     const messageCloseIconID = e.target.id;
+    const discountInputID    = "apply-input";
+    const discountInputIDBtn = "apply-btn";
     
     // Ensures that `showPopup` is only triggered when the `plus` or `minus` button
     //  is clicked, not when other elements (e.g., a link) are clicked.
     if (actionType) {
         updateCartSummary();
         updateCartQuantity(e, actionType);  
-    }
+    };
 
     if (e.target.id === messageCloseIconID) {
         closeMessageIcon();
+    };
+
+    if (e.target.id === discountInputID) {
+        applyDashToInput(e)
+    };
+
+    if (e.target.id === discountInputIDBtn) {
+       
+       const code      = extractDiscountCodeFromForm(discountForm);
+       const isSuccess = discountManager.applyDiscount(code);
+
+       if (isSuccess) {
+            discountInputField.value = "";
+       }
     }
     
     removeFromCart(e);
     handleSave(e);
     handleSaveSidebar(e);
+   
 }
 
 
@@ -169,14 +192,14 @@ function updateCartQuantity(e, actionType) {
         
         const {productIDName, currentProductQtyElement, currentQty, currentPrice } = getCartProductInfo(e);
         if (productIDName && currentProductQtyElement && currentQty && currentPrice) {
-
+            
             const QUANTITY_SELECTOR_NAME = "increase-quantity";
             const newQuantity            = actionType == QUANTITY_SELECTOR_NAME ? currentQty + 1 : currentQty - 1;
     
             if (newQuantity < 1) {
                 newQuantity = 1;
             }
-    
+         
             currentProductQtyElement.textContent = newQuantity;
             
             updateCartPrice(productIDName, newQuantity, currentPrice); 
@@ -204,13 +227,13 @@ function updateCartSummary() {
     let sign  = null;
 
     priceElementsArray.forEach((priceElement) => {
-        
+
+        const priceData = extractCurrencyAndValue(priceElement.textContent);
         if (!sign) {
-            sign = priceElement.textContent.charAt(0);
+            sign = priceData.currency;
         }
-        const priceStr = priceElement.textContent.slice(1);
-        const value    = isNaN(parseFloat(priceStr)) ? 0 : parseFloat(priceStr);
-        total += value;
+       
+        total += priceData.amount;
     })
 
     const tax              = parseFloat(priceTax.textContent.slice(1));
@@ -252,14 +275,12 @@ function updateCartPrice(productName, quantity, currentPriceStr) {
         return;
     };
 
-    const sign  = currentPriceStr.charAt(0)
-    const value = currentPriceStr.slice(1)
-
-    let currentPrice = parseInt(value, 10) || 0;
-    const newPrice   = currentPrice * quantity
+    const priceData = extractCurrencyAndValue(currentPriceStr);
+    const newPrice  = priceData.amount * quantity
     
-    currentPriceElement.textContent = concatenateWithDelimiter(sign, newPrice.toString());
+    currentPriceElement.textContent = concatenateWithDelimiter(priceData.currency, newPrice.toString());
     updateCartQuantityTag(priceElementsArray);
+    updateCartSummary();
 
 }
 
@@ -328,11 +349,6 @@ function removeFromCart(e, silent=false) {
 function removeCardSummary() {
 
     if (priceElementsArray.length === 0) {
-
-        if (!checkIfHTMLElement(cartSummaryCard, "Card Summary card")) {
-            console.error(`The card selector for the card summary is invalid - got ${cartSummaryCard}`);
-            return;
-        }
         cartSummaryCard.remove();
         modifyGridAndCenterContent();
     }
@@ -344,9 +360,15 @@ function updateProductArray() {
 }
 
 
+
 function validatePageElements() {
     if (!checkIfHTMLElement(priceTotal, "Price Total")) return;
+    if (!checkIfHTMLElement(discountForm, "discount Form")) return;
     if (!checkIfHTMLElement(priceTax,   "Price Total")) return;
     if (!checkIfHTMLElement(orderTotal, "Price Tax")) return;
     if (!checkIfHTMLElement(shippingAndHandling, "Shipping and Handling element")) return;
+    if (!checkIfHTMLElement(cartSummaryCard, "Card Summary card")) {
+        console.error(`The card selector for the card summary is invalid - got ${cartSummaryCard}`);
+        return;
+    }
 }
