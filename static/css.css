@@ -784,3 +784,15 @@ img:hover {
 .unclickable {
     pointer-events: none;
 }
+
+#apply-input {
+    font-size: 0.9rem;
+    color: #6C757D;
+    text-align: center;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#apply-input::placeholder {
+    color: #A9A9A9;
+  }

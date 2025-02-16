@@ -10,6 +10,22 @@ This project is a minimal cart system designed to handle frontend interactions u
 - **Fetch API Integration**: The system sends cart data to the backend for processing.
 - **Preloaded Items**: The cart starts with two dummy products for demonstration purposes.
 - **Minimal Backend Dependency**: The backend receives and processes cart updates but does not include a full application structure.
+- **Add a discount code**: Allows the user to enter a discount code of either 50% 20% or 10%
+
+
+## DISCOUNT CODES 
+
+Use any one of these codes to get a discount.
+
+```sh
+  - **EGBIE-GET50-PERCE-NTOFF** – 50% discount
+  - **EGBIE-SUMME-RSALE-20OFF** – 20% discount
+  - **EGBIE-GET10-OFFFI-RSTIM** – 10% discount
+
+```
+
+*Note: Since this project does not contain a backend, so the discount codes are static and predefined.*
+
 
 ## Project Structure
 
