@@ -33,7 +33,7 @@ export function applyDashToInput(e) {
         const fieldValue = santizeValue[i];
     
         if (i > 0 && i % 5 === 0 ) {
-            text += `-${fieldValue}`;
+            text += concatenateWithDelimiter("-", fieldValue);
         } else {
             text += fieldValue
         }
@@ -54,14 +54,16 @@ export const discountManager = {
     },
     _discountApplied: false,
     _currency: null,
+    _currentDiscountCode: null,
 
     /**
      * Applies a discount to the cart total if the provided code is valid and has not already been applied.
      * 
      * @param {string} code - The discount code entered by the user.
+     * @param {boolean} allowReapply - If true, allows reapplying the discount even if it's already applied.
      * @returns {boolean} - Returns `true` if the discount is successfully applied, otherwise `false`.
      */
-    applyDiscount: (code) => {
+    applyDiscount: (code, allowReapply = false) => {
 
         if (!code) return;
 
@@ -70,7 +72,7 @@ export const discountManager = {
         if (discountPercentage !== undefined) {
             showSpinnerFor(spinner);
 
-            if (discountManager._isDiscountApplied()) {
+            if (discountManager.isDiscountApplied() && !allowReapply) {
                 const msg = "This discount has already been applied.";
                 showPopupMessage(msg);
                 return false;
@@ -78,17 +80,13 @@ export const discountManager = {
 
             discountManager._discountApplied = true;
 
-            const cartTotal = discountManager._getCartTotal();
+            const cartTotal      = discountManager._getCartTotal();
             const discountAmount = (discountPercentage / 100) * cartTotal;
-            const newTotal = cartTotal - discountAmount;
+            const newTotal       = cartTotal - discountAmount;
 
             discountManager._renderNewTotal(newTotal, discountPercentage);
             return true;
         }
-
-        const msg = "The discount code you entered is invalid.";
-        showPopupMessage(msg);
-        return false;
     },
 
     /**
@@ -102,7 +100,23 @@ export const discountManager = {
 
         // Normalise the code to uppercase to handle case-insensitive matches
         const normalisedCode = code.toUpperCase();
-        return discountManager._discounts[normalisedCode];
+
+        const discountCode = discountManager._discounts[normalisedCode];
+
+        if (discountCode) {
+            discountManager._currentDiscountCode = normalisedCode;
+        }
+        return discountCode;
+
+    },
+
+    /**
+    * Retrieves the discount code currently applied.
+    * @returns {string|null} The applied discount code, or null if no discount is applied.
+    */
+     getCurrentAppliedDiscountCode: () => {
+        return discountManager._currentDiscountCode;
+
     },
 
     /**
@@ -110,7 +124,7 @@ export const discountManager = {
      * 
      * @returns {boolean} - Returns `true` if the discount is already applied, otherwise `false`.
      */
-    _isDiscountApplied: () => {
+    isDiscountApplied: () => {
         return discountManager._discountApplied;
     },
 

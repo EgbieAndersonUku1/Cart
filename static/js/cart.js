@@ -240,7 +240,14 @@ function updateCartSummary() {
     const shippingCost     = parseFloat(shippingAndHandling.textContent.slice(1)); 
 
     priceTotal.textContent = concatenateWithDelimiter(sign, total);
-    orderTotal.textContent = concatenateWithDelimiter(sign, (total + tax + shippingCost));
+
+    const totalOrderCost   = (total + tax + shippingCost);
+    orderTotal.textContent = concatenateWithDelimiter(sign, totalOrderCost);
+
+    if (discountManager.isDiscountApplied()) {
+        const discountCode = discountManager.getCurrentAppliedDiscountCode();
+        discountManager.applyDiscount(discountCode, true);
+    };
 
     const elements = [priceTotal, orderTotal];
 
