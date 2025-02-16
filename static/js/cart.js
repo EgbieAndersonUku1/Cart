@@ -236,8 +236,8 @@ function updateCartSummary() {
         total += priceData.amount;
     })
 
-    const tax              = parseFloat(priceTax.textContent.slice(1));
-    const shippingCost     = parseFloat(shippingAndHandling.textContent.slice(1)); 
+    const tax              = extractCurrencyAndValue(priceTax.textContent).amount;
+    const shippingCost     = extractCurrencyAndValue(shippingAndHandling.textContent).amount; 
 
     priceTotal.textContent = concatenateWithDelimiter(sign, total);
 
