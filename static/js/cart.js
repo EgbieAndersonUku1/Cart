@@ -238,7 +238,6 @@ function updateCartSummary() {
 
     const tax              = extractCurrencyAndValue(priceTax.textContent).amount;
     const shippingCost     = extractCurrencyAndValue(shippingAndHandling.textContent).amount; 
-
     priceTotal.textContent = concatenateWithDelimiter(sign, total);
 
     const totalOrderCost   = (total + tax + shippingCost);

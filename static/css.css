@@ -796,3 +796,38 @@ img:hover {
 #apply-input::placeholder {
     color: #A9A9A9;
   }
+
+
+#checkout-timeout {
+    display: grid;
+    border: 1px solid black;
+    width: 40%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 2px;
+    right: 0;
+    z-index: 100;
+    background: white;
+    padding: 10px;
+}
+
+#checkout-timeout .info {
+    color: green;
+}
+
+#countdown {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    background-color: #ffcccb;
+  
+}
+
+#countdown p {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #a94442;
+    
+}
