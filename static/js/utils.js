@@ -1,3 +1,6 @@
+const iconCartQuantity = document.getElementById("icon-cart-quantity");
+
+
 
 /**
  * Splits a string using a specified delimiter.
@@ -104,4 +107,9 @@ export function displaySpinnerFor(spinnerElement, timeToDisplay=500) {
     setTimeout(() => {
         toggleSpinner(spinnerElement, false)
     }, timeToDisplay)
+}
+
+
+export function setCartNavIconQuantity(amount) {
+    iconCartQuantity.textContent = amount;
 }

@@ -17,6 +17,7 @@ import { checkIfHTMLElement,
         extractCurrencyAndValue,
         showPopup, 
         toggleSpinner,
+        setCartNavIconQuantity,
         } from "./utils.js";
 
 
@@ -387,12 +388,15 @@ function reserveProductTimer() {
     }
    
     if (minutes < 0) {
+       const EMPTY = 0;
+
        resetTimer();
        clearInterval(reserveTimer);
        displaySpinnerFor(spinner, TIME_IN_MILLSECONDS);
        showPopupMessage("Your items were removed from the cart and returned to services because the allocated purchase time expired.");
        removeAllProducts();
        removeCardSummary();
+       setCartNavIconQuantity(EMPTY);
        checkoutTimer.remove();
          
     };
