@@ -101,14 +101,6 @@ export function extractCurrencyAndValue(priceStr) {
     };
 }
 
-export function displaySpinnerFor(spinnerElement, timeToDisplay=500) {
-    toggleSpinner(spinnerElement)
-
-    setTimeout(() => {
-        toggleSpinner(spinnerElement, false)
-    }, timeToDisplay)
-}
-
 
 export function setCartNavIconQuantity(amount) {
     iconCartQuantity.textContent = amount;

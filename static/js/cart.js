@@ -13,11 +13,11 @@ import { cardsContainer, createProductCard } from "./components.js";
 
 import { checkIfHTMLElement,
         concatenateWithDelimiter,
-        displaySpinnerFor,
         extractCurrencyAndValue,
         showPopup, 
         toggleSpinner,
         setCartNavIconQuantity,
+        showSpinnerFor,
         } from "./utils.js";
 
 
@@ -44,6 +44,7 @@ const run = {
     init: () => {
         validatePageElements();
         reserveProductTimer();
+        setReserveProductTimer({}); // uses the default values e.g  minutes = 1 and seconds = 59
     }
 }
 
@@ -368,6 +369,19 @@ function removeTimerifNoProductsReserved() {
 }
 
 
+function setReserveProductTimer({minutes=1, seconds = 59}) {
+    if (!Number.isInteger(minutes) || !Number.isInteger(seconds)) {
+        console.error(`One or more values are not integers: Expected minutes and seconds to be integers, got minutes: ${typeof minutes}, seconds: ${typeof seconds}`);
+        return;
+    }
+
+    formatTimeUnit(minutesElement, minutes);
+    formatTimeUnit(secondsEement, seconds);
+
+}
+
+
+
 function reserveProductTimer() {
 
     let minutes = minutesElement.textContent;
@@ -392,7 +406,7 @@ function reserveProductTimer() {
 
        resetTimer();
        clearInterval(reserveTimer);
-       displaySpinnerFor(spinner, TIME_IN_MILLSECONDS);
+       showSpinnerFor(spinner, TIME_IN_MILLSECONDS);
        showPopupMessage("Your items were removed from the cart and returned to services because the allocated purchase time expired.");
        removeAllProducts();
        removeCardSummary();
