@@ -345,6 +345,7 @@ function removeFromCart(e, silent=false) {
             updateCartQuantityTag(priceElementsArray);
             toggleSpinner(spinner, false);
             removeCardSummary();
+            removeTimerifNoProductsReserved();
          
 
         }, TIME_IN_MILLSECONDS);
@@ -358,6 +359,12 @@ function removeFromCart(e, silent=false) {
    
 };
 
+
+function removeTimerifNoProductsReserved() {
+    if (priceElementsArray.length === 0) {
+        checkoutTimer.remove();
+    }
+}
 
 
 function reserveProductTimer() {
