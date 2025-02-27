@@ -757,7 +757,7 @@ img:hover {
     border: 1px solid black;
     position: fixed;
     bottom: -100%;
-    right: 30px;
+    left: 30px;
     background-color: #28a745;
     color: #ffffff;
     border-radius: 2px;
@@ -801,7 +801,7 @@ img:hover {
 #checkout-timeout {
     display: grid;
     border: 1px solid black;
-    width: 40%;
+    width: 30%;
     text-align: center;
     justify-content: center;
     align-items: center;

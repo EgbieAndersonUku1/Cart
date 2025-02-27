@@ -102,6 +102,6 @@ export function displaySpinnerFor(spinnerElement, timeToDisplay=500) {
     toggleSpinner(spinnerElement)
 
     setTimeout(() => {
-        toggleSpinner(false)
+        toggleSpinner(spinnerElement, false)
     }, timeToDisplay)
 }
