@@ -13,6 +13,7 @@ import { cardsContainer, createProductCard } from "./components.js";
 
 import { checkIfHTMLElement,
         concatenateWithDelimiter,
+        displaySpinnerFor,
         extractCurrencyAndValue,
         showPopup, 
         toggleSpinner,
@@ -27,16 +28,26 @@ const shippingAndHandling = document.getElementById("shipping-and-handling");
 const spinner             = document.getElementById("spinner");
 const discountForm        = document.getElementById("apply-form");
 const discountInputField  = document.getElementById("apply-input");
-
+const minutesElement      = document.querySelector("#countdown .minutes");
+const secondsEement       = document.querySelector("#countdown .seconds")
+const productElements     = Array.from(document.querySelectorAll(".product"));
+const checkoutTimer       = document.getElementById("checkout-timeout");
 
 let   priceElementsArray  = Array.from(document.querySelectorAll(".product-price"));
 
 const PRODUCT_STORAGE_KEY = "products";
+const TIME_IN_MILLSECONDS = 1000;
 
 
+const run = {
+    init: () => {
+        validatePageElements();
+        reserveProductTimer();
+    }
+}
 
-validatePageElements();
 
+run.init();
 
 
 // EventListeners
@@ -238,7 +249,6 @@ function updateCartSummary() {
 
     const tax              = extractCurrencyAndValue(priceTax.textContent).amount;
     const shippingCost     = extractCurrencyAndValue(shippingAndHandling.textContent).amount; 
-
     priceTotal.textContent = concatenateWithDelimiter(sign, total);
 
     const totalOrderCost   = (total + tax + shippingCost);
@@ -330,11 +340,12 @@ function removeFromCart(e, silent=false) {
         setTimeout(() => {
             productDiv.remove();
 
-            updateProductArray(priceElementsArray);
+            updateProductArray();
             updateCartSummary();
             updateCartQuantityTag(priceElementsArray);
             toggleSpinner(spinner, false);
             removeCardSummary();
+         
 
         }, TIME_IN_MILLSECONDS);
 
@@ -346,6 +357,60 @@ function removeFromCart(e, silent=false) {
     }
    
 };
+
+
+
+function reserveProductTimer() {
+
+    let minutes = minutesElement.textContent;
+    let seconds = secondsEement.textContent;
+
+    if (seconds > 0) {
+        seconds -= 1;
+        secondsEement.textContent = seconds;
+    }
+
+    formatTimeUnit(secondsEement, seconds);
+
+    if (seconds === 1) {
+
+        minutes -= 1;
+        secondsEement.textContent  = 59;
+        formatTimeUnit(minutesElement, minutes);
+    }
+   
+    if (minutes < 0) {
+       resetTimer();
+       clearInterval(reserveTimer);
+       displaySpinnerFor(spinner, TIME_IN_MILLSECONDS);
+       showPopupMessage("Your items were removed from the cart and returned to services because the allocated purchase time expired.");
+       removeAllProducts();
+       removeCardSummary();
+       checkoutTimer.remove();
+         
+    };
+
+    
+};
+
+
+function formatTimeUnit(timeElement, value) {
+    const time = value < 10 ? "0" + value : String(value);
+    timeElement.textContent = time;
+};
+
+
+const reserveTimer = setInterval(() => {
+    reserveProductTimer();
+}, TIME_IN_MILLSECONDS);
+
+
+
+function resetTimer() {
+    minutesElement.textContent = "00";
+    secondsEement.textContent  = "00";
+};
+
 
 
 /**
@@ -367,15 +432,43 @@ function updateProductArray() {
 }
 
 
+function removeAllProducts() {
+    updateProductArray();
+
+    if (!productElements) {
+        console.error("Something went wrong and products element couldn't be found!");
+        return;
+    };
+
+    if (!Array.isArray(productElements)) {
+        console.log(`Expected an array for the products but got type ${typeof productElements}`);
+        return;
+    };
+
+    productElements.forEach((product) => {
+        product.remove();
+    })
+
+    updateProductArray();
+};
+
+
+
+
 
 function validatePageElements() {
     if (!checkIfHTMLElement(priceTotal, "Price Total")) return;
     if (!checkIfHTMLElement(discountForm, "discount Form")) return;
     if (!checkIfHTMLElement(priceTax,   "Price Total")) return;
     if (!checkIfHTMLElement(orderTotal, "Price Tax")) return;
+    if (!checkIfHTMLElement(minutesElement, "minutes Elements")) return;
+    if (!checkIfHTMLElement(secondsEement, "second Elements")) return;
     if (!checkIfHTMLElement(shippingAndHandling, "Shipping and Handling element")) return;
+    if (!checkIfHTMLElement(checkoutTimer, "The checkout timeout element")) return;
     if (!checkIfHTMLElement(cartSummaryCard, "Card Summary card")) {
         console.error(`The card selector for the card summary is invalid - got ${cartSummaryCard}`);
         return;
     }
 }
+
+

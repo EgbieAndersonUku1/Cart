@@ -35,7 +35,7 @@ export function applyDashToInput(e) {
         if (i > 0 && i % 5 === 0 ) {
             text += concatenateWithDelimiter("-", fieldValue);
         } else {
-            text += fieldValue
+            text += fieldValue;
         }
     }
 
