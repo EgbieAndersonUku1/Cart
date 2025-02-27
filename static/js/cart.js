@@ -380,7 +380,7 @@ function reserveProductTimer() {
 
     formatTimeUnit(secondsEement, seconds);
 
-    if (seconds === 1) {
+    if (seconds === 0) {
 
         minutes -= 1;
         secondsEement.textContent  = 59;
@@ -397,6 +397,7 @@ function reserveProductTimer() {
        removeAllProducts();
        removeCardSummary();
        setCartNavIconQuantity(EMPTY);
+       updateCartQuantityTag(priceElementsArray);
        checkoutTimer.remove();
          
     };
