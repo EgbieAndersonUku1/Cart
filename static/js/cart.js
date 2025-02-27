@@ -27,16 +27,25 @@ const shippingAndHandling = document.getElementById("shipping-and-handling");
 const spinner             = document.getElementById("spinner");
 const discountForm        = document.getElementById("apply-form");
 const discountInputField  = document.getElementById("apply-input");
+const minutesElement      = document.querySelector("#countdown .minutes");
+const secondsEement       = document.querySelector("#countdown .seconds")
 
 
 let   priceElementsArray  = Array.from(document.querySelectorAll(".product-price"));
 
 const PRODUCT_STORAGE_KEY = "products";
+const TIME_IN_MILLSECONDS = 1000;
 
 
+const run = {
+    init: () => {
+        validatePageElements();
+        countDownTimer();
+    }
+}
 
-validatePageElements();
 
+run.init();
 
 
 // EventListeners
@@ -347,6 +356,59 @@ function removeFromCart(e, silent=false) {
 };
 
 
+
+function countDownTimer() {
+
+    let minutes = minutesElement.textContent;
+    let seconds = secondsEement.textContent;
+
+    if (seconds > 0) {
+        seconds -= 1;
+        secondsEement.textContent = seconds;
+    }
+
+    formatTimeUnit(secondsEement, seconds);
+
+    if (seconds === 0) {
+
+        minutes -= 1;
+        secondsEement.textContent  = 59;
+        formatTimeUnit(minutesElement, minutes);
+
+    }
+
+    if (minutes === 0 && seconds === 0) {
+       resetTimer();
+       clearInterval(countTimer);
+       
+    };
+
+    
+};
+
+
+function formatTimeUnit(timeElement, value) {
+    const time = value < 10 ? "0" + value : String(value);
+    timeElement.textContent = time;
+};
+
+
+const countTimer = setInterval(() => {
+    countDownTimer();
+}, TIME_IN_MILLSECONDS);
+
+
+function resetTimer() {
+    minutesElement.textContent = "00";
+    secondsEement.textContent  = "00";
+};
+
+
+
+
+
+
+
 /**
  * The function removes card summary display card if the user has manually
  * removed all their item from the cart.
@@ -372,9 +434,13 @@ function validatePageElements() {
     if (!checkIfHTMLElement(discountForm, "discount Form")) return;
     if (!checkIfHTMLElement(priceTax,   "Price Total")) return;
     if (!checkIfHTMLElement(orderTotal, "Price Tax")) return;
+    if (!checkIfHTMLElement(minutesElement, "minutes Elements")) return;
+    if (!checkIfHTMLElement(secondsEement, "second Elements")) return;
     if (!checkIfHTMLElement(shippingAndHandling, "Shipping and Handling element")) return;
     if (!checkIfHTMLElement(cartSummaryCard, "Card Summary card")) {
         console.error(`The card selector for the card summary is invalid - got ${cartSummaryCard}`);
         return;
     }
 }
+
+
