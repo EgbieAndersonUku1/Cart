@@ -190,6 +190,10 @@ input {
     padding-bottom: 4px;
 }
 
+.padding-bottom-lg {
+    padding-bottom: var(--padding-lg);
+}
+
 .padding-left-md {
     padding-left: var(--padding-md);
 }
@@ -829,5 +833,84 @@ img:hover {
     font-size: 2rem;
     font-weight: bold;
     color: #a94442;
+    
+}
+
+/* The section for the gateway payment */
+#gateway-payment  {
+    width: 75%;
+    border: 2px solid lavender;
+    padding: var(--padding-xl);
+    margin: auto;
+    position: fixed;
+    top: 60px;
+    z-index: 10000;
+    background: white;
+    left: 200px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#gateway-form .form-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    column-gap: var(--padding-md);
+}
+
+
+
+#payment-address,
+#payment,
+.group {
+    display: flex;
+    flex-direction: column;
+   
+}
+
+#payment-address,
+#payment{
+    row-gap: 10px;
+   
+}
+
+
+.form-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    row-gap: 10px;
+}
+
+#gateway-form input,
+#expiry-month {
+    height: 40px;
+    font-size: 1.2rem;
+    border: 2px solid lavender;
+  
+}
+
+#expiry-month {
+    text-transform: uppercase;
+    font-size: 1rem;
+}
+
+#complete-payment-btn {
+    width: 100%;
+    padding: var(--padding-md);
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32); 
+    color: white;
+    font-weight: bolder;
+}
+
+#complete-payment-btn:hover {
+    background: linear-gradient(135deg, #66BB6A, #388E3C);
+}
+
+.form-icon {
+    height: 47px;
+    width: 50px;
+    cursor: pointer;
+    margin-top: 1px;
     
 }
