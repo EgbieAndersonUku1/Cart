@@ -110,6 +110,10 @@ input {
     font-weight: bold;
 }
 
+.light-bold {
+    font-weight: 400;
+}
+
 
 
 .capitalize {
@@ -785,8 +789,8 @@ img:hover {
 }
 
 
-.unclickable {
-    pointer-events: none;
+.display {
+    display: none;
 }
 
 #apply-input {
@@ -843,7 +847,7 @@ img:hover {
     padding: var(--padding-xl);
     margin: auto;
     position: fixed;
-    top: 60px;
+    top: 2px;
     z-index: 10000;
     background: white;
     left: 200px;
@@ -882,12 +886,38 @@ img:hover {
 }
 
 #gateway-form input,
-#expiry-month {
+.select-field {
     height: 40px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     border: 2px solid lavender;
+    font-weight: 300;
+    text-transform: capitalize;
   
 }
+
+#gateway-form input[type="email"] {
+    text-transform: lowercase;
+}
+
+
+#gateway-form #zip {
+    text-transform: uppercase;
+}
+
+
+.select-field {
+    text-align: center;
+    background: ghostwhite;
+}
+
+.select-field option {
+    background-color: #f0f0f0; 
+    color: #333; 
+    padding: 5px;
+    font-weight: 300;
+    text-align: left;
+}
+
 
 #expiry-month {
     text-transform: uppercase;
@@ -914,3 +944,22 @@ img:hover {
     margin-top: 1px;
     
 }
+
+#cvc {
+    text-align: center;
+}
+
+#credit-card-no {
+    text-align: center;
+}
+
+input::placeholder {
+    font-weight: 200;
+}
+
+#accepted-cards {
+    margin-bottom: 20px;
+}
+
+
+

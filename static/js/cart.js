@@ -133,11 +133,14 @@ function handleLocalStorageLoad(key) {
  */
 function handleEventDelegeation(e) {
 
+    console.log(e.target.id);
+
     const classList          = e.target.classList;
     const actionType         = classList.contains("increase-quantity") ? "increase-quantity": classList.contains("decrease-quantity") ? "decrease-quantity": null;
     const messageCloseIconID = e.target.id;
     const discountInputID    = "apply-input";
     const discountInputIDBtn = "apply-btn";
+    const creditInputFieldId = "credit-card-no";
     
     // Ensures that `showPopup` is only triggered when the `plus` or `minus` button
     //  is clicked, not when other elements (e.g., a link) are clicked.
@@ -150,9 +153,14 @@ function handleEventDelegeation(e) {
         closeMessageIcon();
     };
 
-    if (e.target.id === discountInputID) {
+    if (e.target.id === discountInputID ) {
         applyDashToInput(e)
     };
+
+    if (e.target.id === creditInputFieldId) {
+        const lengthPerDash = 4;
+        applyDashToInput(e, lengthPerDash, true);
+    }
 
     if (e.target.id === discountInputIDBtn) {
        

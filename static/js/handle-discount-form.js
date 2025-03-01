@@ -10,38 +10,47 @@ const orderTotal = document.getElementById("order-total");
 
 validatePageElements();
 
+
 /**
- * Applies a dash ('-') to the input text after every 5th character.
+ * Formats input text by inserting a dash ('-') at specified intervals.
  * 
- * This function listens for input changes and automatically formats the text
- * by adding dashes after every 5 characters. 
+ * This function listens for input changes and automatically adds dashes 
+ * after every specified number of characters. It also provides an option
+ * to keep only digits by removing all non-numeric characters.
  * 
- * @param {Event} e - The event triggered by the input change.
- * This event object contains the input value that will be formatted.
+ * @param {Event} e - The input event containing the target value.
+ * @param {number} lengthPerDash - The number of characters between dashes (default: 5).
+ * @param {boolean} digitsOnly - If true, removes all non-numeric characters (default: false).
  */
-export function applyDashToInput(e) {
+export function applyDashToInput(e, lengthPerDash=5, digitsOnly=false) {
   
-    const value = e.target.value;
+    const value = e.target.value.trim();
 
     if (!value) return;
+    if (!Number.isInteger(lengthPerDash)) {
+        console.error(`The lengthPerDash must be integer. Expected an integer but got ${typeof lengthPerDash}`);
+    };
 
-    let santizeValue = sanitizeText(value);
-    let text         = "";
+    let santizeValue   = sanitizeText(value, digitsOnly);
+    let formattedText  = [];
+
 
     for (let i=0; i < santizeValue.length; i++) {
 
         const fieldValue = santizeValue[i];
     
-        if (i > 0 && i % 5 === 0 ) {
-            text += concatenateWithDelimiter("-", fieldValue);
+        if (i > 0 && i % lengthPerDash === 0 ) {
+            formattedText.push(concatenateWithDelimiter("-", fieldValue));
         } else {
-            text += fieldValue;
+            formattedText.push(fieldValue);
+            
         }
     }
 
-   e.target.value = text;
+   e.target.value = formattedText.join("");
    
 };
+
 
 /**
  * Manages the application of discount codes and their corresponding percentages.
@@ -185,7 +194,11 @@ export function extractDiscountCodeFromForm(form, name="discountCode") {
 
 
 
-function sanitizeText(text) {
+function sanitizeText(text, onlyNumbers=false) {
+    if (onlyNumbers) {
+        const digitsOnly = text.replace(/\D+/g, "");
+        return digitsOnly;
+    }
     return text?.split("-").join("");
 }
 
