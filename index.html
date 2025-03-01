@@ -13,6 +13,7 @@
 
 <body>
     <div class="spinner" id="spinner"></div>
+    <div id="dim"></div>
     <header>
         <nav aria-label="Main Navigation">
 
@@ -387,18 +388,17 @@
                             </label>
                             <p class="padding-bottom-sm">Remove any spaces before hitting apply</p>
 
-                            <div class="form-group">
+                            <div class="discount-field twoColumnGrid75_25">
                                 <input type="text" name="discountCode" id="apply-input" maxlength="23" placeholder="discount code">
-                                
                                 <button type="button" class="upperCase" id="apply-btn">Apply</button>
                             </div>
                           
                         </form>
                     </div>
 
-                    <a href="#">
-                        <button class="button-lg upperCase black">Checkout Now</button>
-                    </a>
+                  
+                    <button class="button-lg upperCase black" id="checkout-now-btn">Checkout Now</button>
+                    
                     <small class="center">By continuing to checkout you are agreeing to our <a href="#"
                             class="capitalize underline">terms of use</a>
                         and <a href="#" class="capitalize underline">Privacy Policy</a></small>
@@ -559,7 +559,9 @@
 
 
     <section id="gateway-payment">
-
+        <div id="close-geteway" class="flex-end">
+            <img src="static/images/window-close.svg" alt="Close" class="icon" id="payment-img-close-icon">
+        </div>
         <div class="wrapper">
             <p class="center red display" id="gateway-error">One or more of the fields are incorrect</p>
             <p class="center red padding-bottom-lg ">This is a demo. Please do not enter real credit card details.</p>

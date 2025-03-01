@@ -7,34 +7,38 @@ import { modifyGridAndCenterContent,
         } from "./cart-visuals..js";
 
 import { handleSaveSidebar } from "./sidebar.js";
-import { applyDashToInput, discountManager, extractDiscountCodeFromForm } from "./handle-discount-form.js";
+import { discountManager, extractDiscountCodeFromForm } from "./handle-discount-form.js";
 import   getCartProductInfo from "./product.js";
 import { cardsContainer, createProductCard } from "./components.js";
 
 import { checkIfHTMLElement,
+        applyDashToInput,
         concatenateWithDelimiter,
         extractCurrencyAndValue,
         showPopup, 
         toggleSpinner,
         setCartNavIconQuantity,
         showSpinnerFor,
+        dimBackground,
         } from "./utils.js";
 
 
-const cartSummaryCard     = document.getElementById("cart-summary");
-const orderTotal          = document.getElementById("order-total");
-const priceTax            = document.getElementById("price-tax");
-const priceTotal          = document.getElementById("price-total");
-const shippingAndHandling = document.getElementById("shipping-and-handling");
-const spinner             = document.getElementById("spinner");
-const discountForm        = document.getElementById("apply-form");
-const discountInputField  = document.getElementById("apply-input");
-const minutesElement      = document.querySelector("#countdown .minutes");
-const secondsEement       = document.querySelector("#countdown .seconds")
-const productElements     = Array.from(document.querySelectorAll(".product"));
-const checkoutTimer       = document.getElementById("checkout-timeout");
-
-let   priceElementsArray  = Array.from(document.querySelectorAll(".product-price"));
+const cartSummaryCard         = document.getElementById("cart-summary");
+const orderTotal              = document.getElementById("order-total");
+const priceTax                = document.getElementById("price-tax");
+const priceTotal              = document.getElementById("price-total");
+const shippingAndHandling     = document.getElementById("shipping-and-handling");
+const spinner                 = document.getElementById("spinner");
+const discountForm            = document.getElementById("apply-form");
+const discountInputField      = document.getElementById("apply-input");
+const minutesElement          = document.querySelector("#countdown .minutes");
+const secondsEement           = document.querySelector("#countdown .seconds")
+const productElements         = Array.from(document.querySelectorAll(".product"));
+const checkoutTimer           = document.getElementById("checkout-timeout");
+const checkoutBtnNow          = document.getElementById("checkout-now-btn")
+const paymentSection          = document.getElementById("gateway-payment");
+const paymentSectionCloseIcon = document.getElementById("close-geteway")
+let   priceElementsArray      = Array.from(document.querySelectorAll(".product-price"));
 
 const PRODUCT_STORAGE_KEY = "products";
 const TIME_IN_MILLSECONDS = 1000;
@@ -44,7 +48,7 @@ const run = {
     init: () => {
         validatePageElements();
         reserveProductTimer();
-        setReserveProductTimer({}); // uses the default values e.g  minutes = 1 and seconds = 59
+        setReserveProductTimer({minutes:5, seconds:59}); // uses the default values e.g  minutes = 1 and seconds = 59
     }
 }
 
@@ -133,48 +137,15 @@ function handleLocalStorageLoad(key) {
  */
 function handleEventDelegeation(e) {
 
-    console.log(e.target.id);
-
-    const classList          = e.target.classList;
-    const actionType         = classList.contains("increase-quantity") ? "increase-quantity": classList.contains("decrease-quantity") ? "decrease-quantity": null;
-    const messageCloseIconID = e.target.id;
-    const discountInputID    = "apply-input";
-    const discountInputIDBtn = "apply-btn";
-    const creditInputFieldId = "credit-card-no";
-    
-    // Ensures that `showPopup` is only triggered when the `plus` or `minus` button
-    //  is clicked, not when other elements (e.g., a link) are clicked.
-    if (actionType) {
-        updateCartSummary();
-        updateCartQuantity(e, actionType);  
-    };
-
-    if (e.target.id === messageCloseIconID) {
-        closeMessageIcon();
-    };
-
-    if (e.target.id === discountInputID ) {
-        applyDashToInput(e)
-    };
-
-    if (e.target.id === creditInputFieldId) {
-        const lengthPerDash = 4;
-        applyDashToInput(e, lengthPerDash, true);
-    }
-
-    if (e.target.id === discountInputIDBtn) {
-       
-       const code      = extractDiscountCodeFromForm(discountForm);
-       const isSuccess = discountManager.applyDiscount(code);
-
-       if (isSuccess) {
-            discountInputField.value = "";
-       }
-    }
-    
+    handleQuantityChange(e)
+    handleCloseIcon(e);
+    handleDiscountInputField(e);
+    handleCreditInputField(e);
+    handleDiscountApplyBtn(e);
     removeFromCart(e);
     handleSave(e);
     handleSaveSidebar(e);
+    handleCheckoutButton(e);
    
 }
 
@@ -395,6 +366,7 @@ function reserveProductTimer() {
     let minutes = minutesElement.textContent;
     let seconds = secondsEement.textContent;
 
+    
     if (seconds > 0) {
         seconds -= 1;
         secondsEement.textContent = seconds;
@@ -487,6 +459,77 @@ function removeAllProducts() {
 };
 
 
+function handleCheckoutButton(e) {
+    const checkoutBtnNow = "checkout-now-btn";
+
+    if (e.target.id === checkoutBtnNow ) {
+      
+        dimBackground(true);
+        paymentSection.classList.add("show");
+        checkoutTimer.classList.add("d-none");
+    };
+};
+
+
+function handleQuantityChange(e) {
+    const classList  = e.target.classList;
+    const actionType = classList.contains("increase-quantity") ? "increase-quantity": classList.contains("decrease-quantity") ? "decrease-quantity": null;
+
+    if (actionType) {
+        updateCartSummary();
+        updateCartQuantity(e, actionType);  
+    };
+};
+
+
+function handleCloseIcon(e) {
+    const messageCloseIconID             = "message-pop-close-icon";
+    const paymentGatewaySectionCloseIcon =  "close-geteway";
+    const imageGatewaySectionCloseIcon   = "payment-img-close-icon";
+
+    if (e.target.id === messageCloseIconID) {
+        closeMessageIcon();
+    };
+
+    if (e.target.id === paymentGatewaySectionCloseIcon || e.target.id === imageGatewaySectionCloseIcon) {
+        dimBackground(false);
+        paymentSection.classList.remove("show");
+        checkoutTimer.classList.remove("d-none");
+    };
+};
+
+
+function handleDiscountInputField(e) {
+    const discountInputID  = "apply-input";
+    if (e.target.id === discountInputID ) {
+        applyDashToInput(e)
+    };
+}
+
+
+function handleCreditInputField(e) {
+    const creditInputFieldId = "credit-card-no";
+
+    if (e.target.id === creditInputFieldId) {
+        const lengthPerDash = 4;
+        applyDashToInput(e, lengthPerDash, true);
+    }
+};
+
+
+function handleDiscountApplyBtn(e) {
+
+    const discountInputIDBtn = "apply-btn";
+    if (e.target.id === discountInputIDBtn) {
+       
+        const code      = extractDiscountCodeFromForm(discountForm);
+        const isSuccess = discountManager.applyDiscount(code);
+ 
+        if (isSuccess) {
+             discountInputField.value = "";
+        }
+     }
+}
 
 
 
@@ -499,6 +542,9 @@ function validatePageElements() {
     if (!checkIfHTMLElement(secondsEement, "second Elements")) return;
     if (!checkIfHTMLElement(shippingAndHandling, "Shipping and Handling element")) return;
     if (!checkIfHTMLElement(checkoutTimer, "The checkout timeout element")) return;
+    if (!checkIfHTMLElement(checkoutBtnNow, "The checkout Button element")) return;
+    if (!checkIfHTMLElement(paymentSection, "The payment section element")) return;
+    if (!checkIfHTMLElement(paymentSectionCloseIcon, "The payment section close Icon element")) return;
     if (!checkIfHTMLElement(cartSummaryCard, "Card Summary card")) {
         console.error(`The card selector for the card summary is invalid - got ${cartSummaryCard}`);
         return;
