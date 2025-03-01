@@ -13,6 +13,7 @@
 
 <body>
     <div class="spinner" id="spinner"></div>
+    <div id="dim"></div>
     <header>
         <nav aria-label="Main Navigation">
 
@@ -387,18 +388,17 @@
                             </label>
                             <p class="padding-bottom-sm">Remove any spaces before hitting apply</p>
 
-                            <div class="form-group">
+                            <div class="discount-field twoColumnGrid75_25">
                                 <input type="text" name="discountCode" id="apply-input" maxlength="23" placeholder="discount code">
-                                
                                 <button type="button" class="upperCase" id="apply-btn">Apply</button>
                             </div>
                           
                         </form>
                     </div>
 
-                    <a href="#">
-                        <button class="button-lg upperCase black">Checkout Now</button>
-                    </a>
+                  
+                    <button class="button-lg upperCase black" id="checkout-now-btn">Checkout Now</button>
+                    
                     <small class="center">By continuing to checkout you are agreeing to our <a href="#"
                             class="capitalize underline">terms of use</a>
                         and <a href="#" class="capitalize underline">Privacy Policy</a></small>
@@ -556,6 +556,161 @@
         
         
     </div>
+
+
+    <section id="gateway-payment">
+        <div id="close-geteway" class="flex-end">
+            <img src="static/images/window-close.svg" alt="Close" class="icon" id="payment-img-close-icon">
+        </div>
+        <div class="wrapper">
+            <p class="center red display" id="gateway-error">One or more of the fields are incorrect</p>
+            <p class="center red padding-bottom-lg ">This is a demo. Please do not enter real credit card details.</p>
+         
+
+            <form action="" id="gateway-form">
+                
+                <div class="form-container">
+    
+                    <div id="payment-address">
+                        <h3 class="upperCase">Billing address</h3>
+
+                        <div class="form-group">
+
+                            <div class="group">
+                                <label for="full-name"><span class="light-bold">Title*:</span></label>
+                                <select name="title" id="title" aria-label="title" class="select-field" required>
+                                    <option value=""></option>
+                                    <option value="Mr">Mr</option>
+                                    <option value="Mrs">Mrs</option>
+                                    <option value="Miss">Miss</option>
+                                </select>
+                                
+                            </div>
+
+                            <div class="group">
+                                <label for="full-name"><span class="light-bold">Full name*:</span></label>
+                                <input type="text" name="full-name" id="full-name" aria-label="Full name" required placeholder="Full name.." maxlength="30">
+                            </div>
+
+                        </div>
+                     
+            
+                        <label for="email"><span class="light-bold">Email*:</span></label>
+                        <input type="email" name="email" id="email" aria-label="Email address" required placeholder="Email..." maxlength="30">
+            
+                        <label for="address"><span class="light-bold">Address 1*:</span></label>
+                        <input type="text" name="address" id="address" aria-label="Street address" required maxlength="100" placeholder="Enter address..."> 
+
+                        <label for="address"><span class="light-bold">Address 2:</span></label>
+                        <input type="text" name="address2" id="address" aria-label="Street address" maxlength="100" placeholder="Enter address 2..."> 
+            
+                        <label for="city"><span class="light-bold">City*:</span></label>
+                        <input type="text" name="city" id="city" aria-label="City" required placeholder="Enter your city here..." maxlength="50">
+            
+                        <div class="form-group">
+    
+                            <div class="group">
+                                <label for="state"><span class="light-bold">State*:</span></label>
+                                <input type="text" name="state" id="state" aria-label="State" required placeholder="Enter your state..." maxlength="20">
+                            </div>
+                            
+                            <div class="group">
+                                <label for="zip"><span class="light-bold">ZIP Code*:</span></label>
+                                <input type="text" name="zip" 
+                                        id="zip" aria-label="ZIP Code" 
+                                        required placeholder="e.g N1 455..." maxlength="6" class="center upperCase">
+                            </div>
+                            
+                        </div>
+                    </div>
+            
+                    <div id="payment">
+                        <h3 class="upperCase">Payment</h3>
+                        <div id="accepted-cards">
+                            <p class="light-bold">Accepted Cards:</p>
+                            <img src="static/images/payment-card-visa.svg" alt="Visa" class="form-icon icon">
+                            <img src="static/images/mastercard.svg" alt="MasterCard" class="form-icon icon">
+                            <img src="static/images/american-express.svg" alt="American Express" class="form-icon icon">
+                            <img src="static/images/discover.svg" alt="Discover" class="form-icon icon">
+                        </div>
+            
+                        <label for="name-on-card"><span class="light-bold">Name on Card*:</span></label>
+                        <input type="text" name="name-on-card" id="name-on-card" aria-label="Name as it appears on card" required placeholder="Name on card e.g John Smith...">
+            
+                        <label for="credit-card-no"><span class="light-bold">Credit Card Number*:</span></label>
+                        <input type="text" name="credit-card-no"
+                             id="credit-card-no" 
+                             aria-label="Credit Card Number"
+                             required 
+                             maxlength="19" 
+                             minlength="19"
+                             placeholder="e.g. 1234-5678-1234-0000"
+                             >
+            
+                        <label for="expiry-month"><span class="light-bold">Expiry Month*:</span></label>
+                        <select name="expiry-month" id="expiry-month" aria-label="Expiry Month" class="select-field">
+                            <option value="january">January</option>
+                            <option value="february">February</option>
+                            <option value="march">March</option>
+                            <option value="april">April</option>
+                            <option value="may">May</option>
+                            <option value="june">June</option>
+                            <option value="july">July</option>
+                            <option value="august">August</option>
+                            <option value="september">September</option>
+                            <option value="october">October</option>
+                            <option value="november">November</option>
+                            <option value="december">December</option>
+                        </select>
+            
+                        <div class="form-group">
+    
+                            <div class="group">
+                                <label for="expire-year"><span class="light-bold">Expiry Year*:</span></label>
+                                <select name="expiry-year" id="expiry-year" aria-label="Expiry year" class="select-field">
+                                    <option value="2025">2025</option>
+                                    <option value="2026">2026</option>
+                                    <option value="2027">2027</option>
+                                    <option value="2028">2028</option>
+                                    <option value="2029">2029</option>
+                                    <option value="2030">2030</option>
+                                    <option value="2031">2031</option>
+                                    <option value="2032">2032</option>
+                                    <option value="2033">2033</option>
+                                    <option value="2034">2034</option>
+                                    <option value="2035">2035</option>
+                                </select>
+                              
+
+                                
+                            </div>
+                            
+                            <div class="group">
+                                <label for="cvc"><span class="light-bold">CVC*:</span></label>
+                                <input type="text" name="cvc" id="cvc" aria-label="Card Security Code (CVC)" 
+                                pattern="\d{3}"
+                                title="CVC must be exactly 3 digits"
+                                placeholder="e.g 123"
+                                required inputmode="numeric" maxlength="3">
+                            </div>
+                         
+                        </div>
+                    </div>
+    
+                </div>
+            
+                <button type="submit" id="complete-payment-btn">Complete Payment</button>
+            </form>
+
+            <div class="center">
+                <small class="bold">Powered by EU technologies</small>
+            </div>
+            
+        </div>
+
+    </section>
+
+
     <!-- The footer -->
     <footer>
 

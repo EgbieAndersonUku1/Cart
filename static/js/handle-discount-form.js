@@ -10,38 +10,7 @@ const orderTotal = document.getElementById("order-total");
 
 validatePageElements();
 
-/**
- * Applies a dash ('-') to the input text after every 5th character.
- * 
- * This function listens for input changes and automatically formats the text
- * by adding dashes after every 5 characters. 
- * 
- * @param {Event} e - The event triggered by the input change.
- * This event object contains the input value that will be formatted.
- */
-export function applyDashToInput(e) {
-  
-    const value = e.target.value;
 
-    if (!value) return;
-
-    let santizeValue = sanitizeText(value);
-    let text         = "";
-
-    for (let i=0; i < santizeValue.length; i++) {
-
-        const fieldValue = santizeValue[i];
-    
-        if (i > 0 && i % 5 === 0 ) {
-            text += concatenateWithDelimiter("-", fieldValue);
-        } else {
-            text += fieldValue;
-        }
-    }
-
-   e.target.value = text;
-   
-};
 
 /**
  * Manages the application of discount codes and their corresponding percentages.
@@ -185,9 +154,6 @@ export function extractDiscountCodeFromForm(form, name="discountCode") {
 
 
 
-function sanitizeText(text) {
-    return text?.split("-").join("");
-}
 
 
 function validatePageElements() {

@@ -110,6 +110,10 @@ input {
     font-weight: bold;
 }
 
+.light-bold {
+    font-weight: 400;
+}
+
 
 
 .capitalize {
@@ -188,6 +192,10 @@ input {
 
 .padding-bottom-sm {
     padding-bottom: 4px;
+}
+
+.padding-bottom-lg {
+    padding-bottom: var(--padding-lg);
 }
 
 .padding-left-md {
@@ -690,6 +698,9 @@ img:hover {
     transition: transform 2s linear;   
 }
 
+#checkout-timeout.d-none {
+    display: none;
+}
 
 #window-icon.hide {
     width: 0;
@@ -781,8 +792,8 @@ img:hover {
 }
 
 
-.unclickable {
-    pointer-events: none;
+.display {
+    display: none;
 }
 
 #apply-input {
@@ -830,4 +841,158 @@ img:hover {
     font-weight: bold;
     color: #a94442;
     
+}
+
+/* The section for the gateway payment */
+#gateway-payment  {
+    width: 75%;
+    border: 2px solid lavender;
+    padding: var(--padding-xl);
+    margin: auto;
+    position: fixed;
+    top: 2px;
+    z-index: 10000;
+    background: white;
+    left: 200px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: linear 2s ease-in-out;
+    display: none;
+}
+
+#gateway-payment.show {
+    display: block;
+}
+
+
+#gateway-form .form-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    column-gap: var(--padding-md);
+}
+
+
+
+#payment-address,
+#payment,
+.group {
+    display: flex;
+    flex-direction: column;
+   
+}
+
+#payment-address,
+#payment{
+    row-gap: 10px;
+   
+}
+
+
+.form-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    row-gap: 10px;
+}
+
+#gateway-form input,
+.select-field {
+    height: 40px;
+    font-size: 1.1rem;
+    border: 2px solid lavender;
+    font-weight: 300;
+    text-transform: capitalize;
+  
+}
+
+#gateway-form input[type="email"] {
+    text-transform: lowercase;
+}
+
+
+#gateway-form #zip {
+    text-transform: uppercase;
+}
+
+
+.select-field {
+    text-align: center;
+    background: ghostwhite;
+}
+
+.select-field option {
+    background-color: #f0f0f0; 
+    color: #333; 
+    padding: 5px;
+    font-weight: 300;
+    text-align: left;
+}
+
+
+#expiry-month {
+    text-transform: uppercase;
+    font-size: 1rem;
+}
+
+#complete-payment-btn {
+    width: 100%;
+    padding: var(--padding-md);
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32); 
+    color: white;
+    font-weight: bolder;
+}
+
+#complete-payment-btn:hover {
+    background: linear-gradient(135deg, #66BB6A, #388E3C);
+}
+
+.form-icon {
+    height: 47px;
+    width: 50px;
+    cursor: pointer;
+    margin-top: 1px;
+    
+}
+
+#cvc {
+    text-align: center;
+}
+
+#credit-card-no {
+    text-align: center;
+}
+
+input::placeholder {
+    font-weight: 200;
+}
+
+#accepted-cards {
+    margin-bottom: 20px;
+}
+
+
+
+.discount-field {
+   
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.twoColumnGrid75_25 {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    grid-template-rows: auto;
+}
+
+
+#dim {
+    position: fixed;  
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);  
+    z-index: 1000; 
+    display: none;
 }
