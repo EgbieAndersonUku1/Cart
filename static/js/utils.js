@@ -156,7 +156,7 @@ export function applyDashToInput(e, lengthPerDash=5, digitsOnly=false) {
 };
 
 
-function sanitizeText(text, onlyNumbers=false) {
+export function sanitizeText(text, onlyNumbers=false) {
     if (onlyNumbers) {
         const digitsOnly = text.replace(/\D+/g, "");
         return digitsOnly;
@@ -164,6 +164,55 @@ function sanitizeText(text, onlyNumbers=false) {
     return text?.split("-").join("");
 }
 
+
+
+/**
+ * Masks a credit card number, hiding all but the last four digits.
+ *
+ * The function replaces the leading digits with '*' while keeping the last four digits visible.
+ * It ensures that the credit card number is within a valid range (12 to 19 digits) and that
+ * it contains non-numeric characters.
+ *
+ * @param {string} creditCardNo - The credit card number to be masked.
+ * @returns {string} The masked credit card number.
+ * @throws {Error} If the input is not a string or has an invalid length.
+ * @throws {Error} If the input are non-numeric characters
+ *
+ * @example
+ * maskCreditCardNo("1234567812345678"); // "************5678"
+ * maskCreditCardNo("378282246310005");  // "***********0005" (Amex)
+ * maskCreditCardNo("30569309025904");   // "**********5904" (Diners Club)
+ */
+export function maskCreditCardNo(creditCardNo) {
+    if (!creditCardNo || typeof creditCardNo !== "string") {
+        throw new Error("Invalid credit card number");
+    }
+
+    const CREDIT_CARD_LENGTH = creditCardNo.length;
+
+    if (CREDIT_CARD_LENGTH !== sanitizeText(creditCardNo, true).length ) {
+        throw new Error(`The credit card is invalid because it contains non-numeric values. Credit card no: ${creditCardNo}`);
+    };
+
+    const creditCardLength           = CREDIT_CARD_LENGTH;
+    const MIN_CREDIT_CARD_LENGTH     = 12;
+    const MAX_CREDIT_CARD_LENGTH     = 19;
+    const EXPECTED_LAST_DIGIT_LENGTH = 4;
+
+    if (creditCardLength < MIN_CREDIT_CARD_LENGTH || creditCardLength > MAX_CREDIT_CARD_LENGTH) {
+        throw new Error("Credit card length must be: Visa, Mastercard, Discover: 16, American Express: 15, Diners Club: 14, Maestro: 12 to 19");
+    }
+
+    const numberToMask   = creditCardLength - 4;
+    const maskedNumber   = "*".repeat(numberToMask);
+    const lastFourDigits = creditCardNo.slice(-4);
+
+    if (lastFourDigits.length < EXPECTED_LAST_DIGIT_LENGTH) {
+        throw new Error(`Your credit card is invalid because it contains non-digits - credit card: ${creditCardNo}`)
+    }
+
+    return concatenateWithDelimiter(maskedNumber, lastFourDigits);
+};
 
 
 function validatePageElements() {

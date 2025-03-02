@@ -20,6 +20,7 @@ import { checkIfHTMLElement,
         setCartNavIconQuantity,
         showSpinnerFor,
         dimBackground,
+        sanitizeText
         } from "./utils.js";
 
 
@@ -136,16 +137,17 @@ function handleLocalStorageLoad(key) {
  * @param {*} e - The event
  */
 function handleEventDelegeation(e) {
-
+    
     handleQuantityChange(e)
     handleCloseIcon(e);
     handleDiscountInputField(e);
     handleCreditInputField(e);
     handleDiscountApplyBtn(e);
-    removeFromCart(e);
+    handleRemoveFromCart(e);
     handleSave(e);
     handleSaveSidebar(e);
     handleCheckoutButton(e);
+    handleCVCInputField(e);
    
 }
 
@@ -162,7 +164,7 @@ function handleSave(e) {
             try {
                 cardsContainer.add(cardDiv);
                 updateSaveIconQuantity();
-                removeFromCart(e, true);
+                handleRemoveFromCart(e, true);
                 showPopupMessage("Your item has been saved. You can view it in the navigation bar by clicking the save icon")
             } catch (error) {
                 console.warn(`Something went wrong and the card div with id ${cardDiv.id} and it couldn't be saved in the saved list`);
@@ -299,7 +301,7 @@ function updateCartPrice(productName, quantity, currentPriceStr) {
  * 
  * @param {Event} e - The event object triggered by the remove action (e.g., clicking a remove button).
  */
-function removeFromCart(e, silent=false) {
+function handleRemoveFromCart(e, silent=false) {
 
     const EXPECTED_CLASS_NAME = "remove";
     const divID               = e.target.dataset.removedivid || e.target.className == EXPECTED_CLASS_NAME;
@@ -532,6 +534,17 @@ function handleDiscountApplyBtn(e) {
 }
 
 
+function handleCVCInputField(e) {
+    
+    const cvcInputFieldID = "cvc";
+
+    if (e.target.id === cvcInputFieldID) {
+        const numbersOnly = sanitizeText(e.target.value, true);
+        e.target.value    = numbersOnly;
+    }
+}
+
+
 
 function validatePageElements() {
     if (!checkIfHTMLElement(priceTotal, "Price Total")) return;
@@ -545,10 +558,8 @@ function validatePageElements() {
     if (!checkIfHTMLElement(checkoutBtnNow, "The checkout Button element")) return;
     if (!checkIfHTMLElement(paymentSection, "The payment section element")) return;
     if (!checkIfHTMLElement(paymentSectionCloseIcon, "The payment section close Icon element")) return;
-    if (!checkIfHTMLElement(cartSummaryCard, "Card Summary card")) {
-        console.error(`The card selector for the card summary is invalid - got ${cartSummaryCard}`);
-        return;
-    }
+    if (!checkIfHTMLElement(cartSummaryCard, "Card Summary card")) return;
+    
 }
 
 
