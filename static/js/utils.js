@@ -197,8 +197,7 @@ export function maskCreditCardNo(creditCardNo) {
     const creditCardLength           = CREDIT_CARD_LENGTH;
     const MIN_CREDIT_CARD_LENGTH     = 12;
     const MAX_CREDIT_CARD_LENGTH     = 19;
-    const EXPECTED_LAST_DIGIT_LENGTH = 4;
-
+  
     if (creditCardLength < MIN_CREDIT_CARD_LENGTH || creditCardLength > MAX_CREDIT_CARD_LENGTH) {
         throw new Error("Credit card length must be: Visa, Mastercard, Discover: 16, American Express: 15, Diners Club: 14, Maestro: 12 to 19");
     }
@@ -206,10 +205,6 @@ export function maskCreditCardNo(creditCardNo) {
     const numberToMask   = creditCardLength - 4;
     const maskedNumber   = "*".repeat(numberToMask);
     const lastFourDigits = creditCardNo.slice(-4);
-
-    if (lastFourDigits.length < EXPECTED_LAST_DIGIT_LENGTH) {
-        throw new Error(`Your credit card is invalid because it contains non-digits - credit card: ${creditCardNo}`)
-    }
 
     return concatenateWithDelimiter(maskedNumber, lastFourDigits);
 };
