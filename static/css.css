@@ -97,6 +97,10 @@ input {
     list-style: none;
  }
 
+ ul ol {
+    list-style: square ;
+ }
+
 
 /* variables */
 
@@ -995,4 +999,20 @@ input::placeholder {
     background: rgba(0, 0, 0, 0.5);  
     z-index: 1000; 
     display: none;
+}
+
+
+#order-confirmation{
+    width: 75%;
+    border: 2px solid lavender;
+    padding: var(--padding-xl);
+    margin: auto;
+    position: fixed;
+    top: 2px;
+    z-index: 10000;
+    background: white;
+    left: 200px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: linear 2s ease-in-out;
+   
 }
