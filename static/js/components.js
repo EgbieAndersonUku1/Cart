@@ -1,7 +1,8 @@
-import { checkIfHTMLElement } from "./utils.js";
+import { checkIfHTMLElement, concatenateWithDelimiter } from "./utils.js";
 
 const cardsDiv    = document.querySelector("#saved-products .cards");
 const sideBarMsg  = document.querySelector(".save-sidebar-msg");
+const ordersDiv   = document.getElementById("orders");
 
 
 validateCardDiv();
@@ -12,6 +13,10 @@ function validateCardDiv() {
         return;
     };
     if (!checkIfHTMLElement(sideBarMsg, "The sidebar message")) {
+        return;
+    };
+
+    if (!checkIfHTMLElement(ordersDiv, "The purchase orders div")) {
         return;
     };
 
@@ -27,6 +32,90 @@ export const cardsContainer = {
         }
         cardsDiv.appendChild(cardDiv);
     }
+}
+
+
+
+export function createOrdersDiv(orders) {
+    
+    ordersDiv.classList.add("order", "padding-bottom-sm");
+    
+    orders.forEach((order) => {
+
+        try {
+            const orderDiv = createOrderDiv(order);
+            ordersDiv.appendChild(orderDiv);
+
+        } catch (error) {
+            console.warn(error);
+        }
+    
+    })
+
+    return ordersDiv;
+}
+
+
+
+function createOrderDiv(order) {
+   
+    if (!order || typeof order != "object") {
+        throw new Error(`Expected an object but got type: ${typeof order}`);
+    }
+
+    const orderDiv         = document.createElement("div");
+    const ulElement        = document.createElement("ul");
+
+    ulElement.className    = "highlight-box";
+    orderDiv.className     = "padding-bottom-md";
+
+    const MAX_RANDOM_VALUE = 500;
+    const PRODUCT_ID       = order.productIDName || '';
+    const ulID             = PRODUCT_ID.slice(-1) || Math.floor(Math.random() * MAX_RANDOM_VALUE);
+    ulElement.id           = concatenateWithDelimiter("order", ulID, "-");
+    
+    const PRODUCT_KEY_MAPPING = {
+        "currentQty" : "Quantity purchased : ",
+        "productIDName" : "Product ID: ",
+        "productName" : "Product name",
+        "currentPrice" : "Price",
+        "selectorID" : '',
+    }
+
+    // create ul and ol 
+    for (const key in order) {
+
+        const liElement   = document.createElement("ol");
+        const spanElement = document.createElement("span");
+        const value       = order[key];
+        let textNode;
+
+        spanElement.className   = "medium-bold"
+        spanElement.textContent =  PRODUCT_KEY_MAPPING[key];
+
+        liElement.appendChild(spanElement)
+        
+        if (key !== "selectorID") {
+           
+            if (key === PRODUCT_ID) {
+            
+                textNode = document.createTextNode(value ? ` ${value}  `: ulID);
+
+            } else {
+          
+                textNode = document.createTextNode(value ? ` ${value} `: `${key} is not found`);
+            }
+
+            liElement.classList.add("padding-left-md");
+            liElement.appendChild(textNode)
+            ulElement.appendChild(liElement);
+       }
+
+    };
+    orderDiv.appendChild(ulElement);
+    return orderDiv;
+
+
 }
 
 

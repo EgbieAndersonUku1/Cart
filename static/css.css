@@ -118,7 +118,15 @@ input {
     font-weight: 400;
 }
 
+.medium-bold {
+    font-weight: 500;
+}
 
+.highlight-box {
+    background: ghostwhite;
+    padding-top: var(--padding-md);
+    padding-bottom: var(--padding-md);
+}
 
 .capitalize {
     text-transform: capitalize;
@@ -200,6 +208,10 @@ input {
 
 .padding-bottom-lg {
     padding-bottom: var(--padding-lg);
+}
+
+.padding-bottom-md {
+    padding-bottom: var(--padding-md);
 }
 
 .padding-left-md {
@@ -1014,5 +1026,6 @@ input::placeholder {
     left: 200px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     transition: linear 2s ease-in-out;
+    /* display: none; */
    
 }

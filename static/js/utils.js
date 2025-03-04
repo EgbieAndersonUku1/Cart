@@ -1,6 +1,10 @@
 const iconCartQuantity     = document.getElementById("icon-cart-quantity");
 const dimBackgroundElement = document.getElementById("dim");
 
+import getCartProductInfo from "./product.js";
+
+
+
 validatePageElements();
 
 
@@ -82,8 +86,13 @@ export function showPopup(element, duration=500) {
 }
 
 
-export function findProductByIndex(products, selectorID) {
+export function findProductBySelector(products, selectorID) {
     return products.findIndex((product) => product.selectorID === selectorID);       
+}
+
+
+export function filterItemsById(items, id) {
+    return items.filter((item) => item.productIDName !== id);
 }
 
 
@@ -210,7 +219,14 @@ export function maskCreditCardNo(creditCardNo) {
 };
 
 
+
+
+
+
+
+
 function validatePageElements() {
     if (!checkIfHTMLElement(iconCartQuantity, "Cart quantity")) return;
     if (!checkIfHTMLElement(dimBackgroundElement, "dim background element")) return;
+   
 }

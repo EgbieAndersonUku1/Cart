@@ -718,32 +718,15 @@
         </div>
         <div class="wrapper">
             
-            <p class="order-confirmation" id="greeting"><span class="bold">Thank You Message: </span>Thank you for your order!</p>
+            <p class="order-confirmation center padding-bottom-lg" id="greeting">Thank you for your order!</p>
             <p class="order-confirmation" id="order-number"><span class="bold">Order Number: </span>Unique identifier number here</p>
-            <p class="order-confirmation bold" id="orders-summary">Orders</p>
+            <p class="order-confirmation bold padding-bottom-sm" id="orders-summary">Purchased Orders</p>
 
-            <div class="orders">
-                <div class="order padding-bottom-sm">
-                    <ul id="order-1">
-                        <ol>Item(s) purchased (Name, Quantity, Price)</ol>
-                        <ol>Subtotal, Taxes, Discounts (if any)</ol>
-                        <ol>Total amount paid</ol>
-                    </ul>
-                </div>
-
-                <div class="order padding-bottom-sm">
-                    <ul id="order-2">
-                        <ol>Item(s) purchased (Name, Quantity, Price)</ol>
-                        <ol>Subtotal, Taxes, Discounts (if any)</ol>
-                        <ol>Total amount paid</ol>
-                    </ul>
-                </div>
+            <div id="orders">
+              
 
             </div>
             
-
-          
-       
            
             <p class="order-confirmation" id="payment-card-details"><span class="bold">Card details: </span>Card details here </p>
             <p class="order-confirmation" id="billing-address"><span class="bold">Billing address </span>Billing address here</p>
@@ -851,6 +834,9 @@
     </footer>
 
     <script src="static/js/cart.js" type="module" defer></script>
+    <script src="static/js/checkout.js" type="module" defer></script>
+
+
 </body>
 
 </html>
