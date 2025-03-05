@@ -97,6 +97,10 @@ input {
     list-style: none;
  }
 
+ ul ol {
+    list-style: square ;
+ }
+
 
 /* variables */
 
@@ -114,7 +118,15 @@ input {
     font-weight: 400;
 }
 
+.medium-bold {
+    font-weight: 500;
+}
 
+.highlight-box {
+    background: ghostwhite;
+    padding-top: var(--padding-md);
+    padding-bottom: var(--padding-md);
+}
 
 .capitalize {
     text-transform: capitalize;
@@ -196,6 +208,10 @@ input {
 
 .padding-bottom-lg {
     padding-bottom: var(--padding-lg);
+}
+
+.padding-bottom-md {
+    padding-bottom: var(--padding-md);
 }
 
 .padding-left-md {
@@ -627,6 +643,30 @@ img:hover {
     bottom: 50%;
 }
 
+
+.spinner2,
+.spinner {
+     /* position */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: 50%;
+    bottom: 50%;
+}
+
+.spinner2 {
+    display: none;
+    width: 100px;
+    height: 100px;
+    border: 8px solid #f3f3f3;      /* Light grey */
+    border-top: 8px solid #3498db;  /* Blue */
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+
+   
+   
+}
+
 /* Keyframes for spin animation */
 @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -844,7 +884,8 @@ img:hover {
 }
 
 /* The section for the gateway payment */
-#gateway-payment  {
+#gateway-payment,
+#order-confirmation  {
     width: 75%;
     border: 2px solid lavender;
     padding: var(--padding-xl);
@@ -863,6 +904,9 @@ img:hover {
     display: block;
 }
 
+#order-confirmation.show {
+    display: block;
+}
 
 #gateway-form .form-container {
     display: grid;
@@ -985,6 +1029,13 @@ input::placeholder {
     grid-template-rows: auto;
 }
 
+.tripleColumn25_25_50 {
+    display: grid;
+    grid-template-columns: 25% 25% 50%;
+    grid-template-rows: auto;
+    /* column-gap: 5px; */
+}
+
 
 #dim {
     position: fixed;  
@@ -996,3 +1047,4 @@ input::placeholder {
     z-index: 1000; 
     display: none;
 }
+

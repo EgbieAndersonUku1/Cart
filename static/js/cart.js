@@ -1,4 +1,4 @@
-import { getLocalStorage, updateProductInLocalStorage  } from "./db.js";
+import { getLocalStorage, updateProductInLocalStorage, removeFromLocalStorage  } from "./db.js";
 import { closeMessageIcon, showPopupMessage } from "./messages.js";
 import { modifyGridAndCenterContent, 
          updateCartQuantityTag, 
@@ -10,7 +10,6 @@ import { handleSaveSidebar } from "./sidebar.js";
 import { discountManager, extractDiscountCodeFromForm } from "./handle-discount-form.js";
 import   getCartProductInfo from "./product.js";
 import { cardsContainer, createProductCard } from "./components.js";
-
 import { checkIfHTMLElement,
         applyDashToInput,
         concatenateWithDelimiter,
@@ -20,6 +19,7 @@ import { checkIfHTMLElement,
         setCartNavIconQuantity,
         showSpinnerFor,
         dimBackground,
+        sanitizeText,
         } from "./utils.js";
 
 
@@ -37,12 +37,11 @@ const productElements         = Array.from(document.querySelectorAll(".product")
 const checkoutTimer           = document.getElementById("checkout-timeout");
 const checkoutBtnNow          = document.getElementById("checkout-now-btn")
 const paymentSection          = document.getElementById("gateway-payment");
-const paymentSectionCloseIcon = document.getElementById("close-geteway")
+const paymentSectionCloseIcon = document.getElementById("close-geteway");
 let   priceElementsArray      = Array.from(document.querySelectorAll(".product-price"));
 
 const PRODUCT_STORAGE_KEY = "products";
 const TIME_IN_MILLSECONDS = 1000;
-
 
 const run = {
     init: () => {
@@ -57,38 +56,44 @@ run.init();
 
 
 // EventListeners
-document.addEventListener("DOMContentLoaded", () => {handleLocalStorageLoad(PRODUCT_STORAGE_KEY);});
-window.addEventListener("beforeunload", handleBeforeUnload);
+document.addEventListener("DOMContentLoaded", () => {handleLocalStorageLoad(PRODUCT_STORAGE_KEY)});
+window.addEventListener("beforeunload", () => handleSyncCartWithLocalStorage(".increase-quantity"));
+
 window.addEventListener("click", handleEventDelegeation);
 window.addEventListener("input", handleEventDelegeation); 
 
-function handleBeforeUnload() {
-  
-    try {
-        const actionType      = ".increase-quantity";
-        const productElements = Array.from(document.querySelectorAll(actionType));
 
-        if (!Array.isArray(productElements) || productElements.length < 1) return;
+function handleSyncCartWithLocalStorage(actionType=".increase-quantity") {
+    
+    try {
+        let updatedCount = 0;
+        const productElements = document.querySelectorAll(actionType);
+
+        if (productElements.length === 0) return;
 
         productElements.forEach((productElement) => {
-            const productId  = productElement.dataset.productid;
+            const productId   = productElement.dataset.productid;
             const productInfo = getCartProductInfo(productElement);
 
             if (!productInfo) {
-                console.warn("The product info wasn't found");
+                console.warn(`Product info not found for ID: ${productId}`);
                 return;
-            };
+            }
 
             updateProductInLocalStorage(PRODUCT_STORAGE_KEY, productInfo, productId);
+            updatedCount++;
            
-        } );
+        } )
+        return updatedCount;
 
     } catch (error) {
-        console.error("Unexpected error in handleBeforeUnload:", error);   
+        console.error("Unexpected error in handleSyncCartWithLocalStorage:", error);  
+        return -1; 
 
-    };
+    }
        
-};
+}
+
 
 
 function handleLocalStorageLoad(key) {
@@ -99,8 +104,21 @@ function handleLocalStorageLoad(key) {
 
     if (!Array.isArray(products) || products.length == 0) {
         window.location.reload();
-        return;
-    };
+    }
+
+    // The application is designed that when the cart.html page is refreshed, all deleted items are restored,  
+    // now, any changes made to the quantity for each product will remain persistent even after a page refresh.
+    //  
+    // However, when a product is removed using the delete icon on the cart page and the page is refreshed,  
+    // the localStorage becomes out of sync. This is because the refresh restores the items on the UI page,  
+    // including their quantities or presistent quantites, but does not restore the deleted products in the localStorage.  
+    //
+    // As a result, the UI displays renewed data that is not reflected in localStorage.  
+    // The `handleSyncCartWithLocalStorage` function ensures that localStorage is always in sync after a manual product deletion
+    // and page refresh.  
+    if (priceElementsArray.length != products.length) {
+        handleSyncCartWithLocalStorage();
+    }
 
     const EXPECTED_NO_OF_KEYS = 4;
 
@@ -136,16 +154,18 @@ function handleLocalStorageLoad(key) {
  * @param {*} e - The event
  */
 function handleEventDelegeation(e) {
-
+    console.log(e.target.id)
     handleQuantityChange(e)
     handleCloseIcon(e);
     handleDiscountInputField(e);
     handleCreditInputField(e);
     handleDiscountApplyBtn(e);
-    removeFromCart(e);
+    handleRemoveFromCart(e);
     handleSave(e);
     handleSaveSidebar(e);
     handleCheckoutButton(e);
+    handleCVCInputField(e);
+  
    
 }
 
@@ -162,7 +182,7 @@ function handleSave(e) {
             try {
                 cardsContainer.add(cardDiv);
                 updateSaveIconQuantity();
-                removeFromCart(e, true);
+                handleRemoveFromCart(e, true);
                 showPopupMessage("Your item has been saved. You can view it in the navigation bar by clicking the save icon")
             } catch (error) {
                 console.warn(`Something went wrong and the card div with id ${cardDiv.id} and it couldn't be saved in the saved list`);
@@ -299,7 +319,7 @@ function updateCartPrice(productName, quantity, currentPriceStr) {
  * 
  * @param {Event} e - The event object triggered by the remove action (e.g., clicking a remove button).
  */
-function removeFromCart(e, silent=false) {
+function handleRemoveFromCart(e, silent=false) {
 
     const EXPECTED_CLASS_NAME = "remove";
     const divID               = e.target.dataset.removedivid || e.target.className == EXPECTED_CLASS_NAME;
@@ -315,12 +335,14 @@ function removeFromCart(e, silent=false) {
 
         // make the item unclickable to prevent the user from clicking multiple times while it is spinner is spinning
         productDiv.style.pointerEvents = "none";
-    
+        const productIdentifier        =  productDiv?.id.split("-")[0] || '';
+
         toggleSpinner(spinner);
 
         setTimeout(() => {
             productDiv.remove();
 
+            removeFromLocalStorage(PRODUCT_STORAGE_KEY, productIdentifier);
             updateProductArray();
             updateCartSummary();
             updateCartQuantityTag(priceElementsArray);
@@ -463,7 +485,7 @@ function handleCheckoutButton(e) {
     const checkoutBtnNow = "checkout-now-btn";
 
     if (e.target.id === checkoutBtnNow ) {
-      
+        handleSyncCartWithLocalStorage();
         dimBackground(true);
         paymentSection.classList.add("show");
         checkoutTimer.classList.add("d-none");
@@ -533,6 +555,18 @@ function handleDiscountApplyBtn(e) {
 
 
 
+function handleCVCInputField(e) {
+    
+    const cvcInputFieldID = "cvc";
+
+    if (e.target.id === cvcInputFieldID) {
+        const numbersOnly = sanitizeText(e.target.value, true);
+        e.target.value    = numbersOnly;
+    }
+}
+
+
+
 function validatePageElements() {
     if (!checkIfHTMLElement(priceTotal, "Price Total")) return;
     if (!checkIfHTMLElement(discountForm, "discount Form")) return;
@@ -545,10 +579,9 @@ function validatePageElements() {
     if (!checkIfHTMLElement(checkoutBtnNow, "The checkout Button element")) return;
     if (!checkIfHTMLElement(paymentSection, "The payment section element")) return;
     if (!checkIfHTMLElement(paymentSectionCloseIcon, "The payment section close Icon element")) return;
-    if (!checkIfHTMLElement(cartSummaryCard, "Card Summary card")) {
-        console.error(`The card selector for the card summary is invalid - got ${cartSummaryCard}`);
-        return;
-    }
+    if (!checkIfHTMLElement(cartSummaryCard, "Card Summary card")) return;
+
+    
 }
 
 

@@ -1,4 +1,4 @@
-import {findProductByIndex } from "./utils.js";
+import {findProductBySelector, filterItemsById } from "./utils.js";
 
 
 export function setLocalStorage(key, value) {
@@ -21,32 +21,38 @@ export function getLocalStorage(key) {
 }
 
 
-export function removeFromLocalStorage(key, id) {
-    const items      = getLocalStorage(key);
-    const NOT_FOUND  = -1;
 
-    if (items) {
-        const index = findProductByIndex(items, id);
-        if (index != NOT_FOUND && Array.isArray(items)) {
-            items.slice(index, 1);
+export function removeFromLocalStorage(key, id) {
+    const items = getLocalStorage(key);
+
+    if (items && Array.isArray(items)) {
+        const newItems = filterItemsById(items, id);
+
+        if (newItems.length !== items.length) { 
+            setLocalStorage(key, newItems);
+        } else {
+            console.log(`Item with id ${id} was not found in ${key}.`);
         }
-        setLocalStorage(key, items);
+
     } else {
-        console.log(`Attempted to remove item with id ${id} but it wasn't found.`);
+        console.log(`Attempted to remove item with id ${id} but the key "${key}" does not exist or is not an array.`);
     }
 }
+
 
 
 export function updateProductInLocalStorage(key, productInfo, productID) {
     const NOT_FOUND = -1;
 
-    if (productInfo && productInfo.productIDName && productInfo.currentQty && productInfo.currentPrice) {
+    if (productInfo && productInfo.productIDName && productInfo.currentQty && productInfo.currentPrice && productInfo.productName) {
 
         const products = getLocalStorage(key);
-        const index    = findProductByIndex(products, productID);
-       
+        const index    = findProductBySelector(products, productID);
+
+      
         const value    = {
             productIDName: productInfo.productIDName,
+            productName: productInfo.productName,
             currentQty: productInfo.currentQty,
             currentPrice: productInfo.currentPrice,
             selectorID: productID,
