@@ -10,7 +10,6 @@ import { handleSaveSidebar } from "./sidebar.js";
 import { discountManager, extractDiscountCodeFromForm } from "./handle-discount-form.js";
 import   getCartProductInfo from "./product.js";
 import { cardsContainer, createProductCard } from "./components.js";
-
 import { checkIfHTMLElement,
         applyDashToInput,
         concatenateWithDelimiter,
@@ -38,7 +37,7 @@ const productElements         = Array.from(document.querySelectorAll(".product")
 const checkoutTimer           = document.getElementById("checkout-timeout");
 const checkoutBtnNow          = document.getElementById("checkout-now-btn")
 const paymentSection          = document.getElementById("gateway-payment");
-const paymentSectionCloseIcon = document.getElementById("close-geteway")
+const paymentSectionCloseIcon = document.getElementById("close-geteway");
 let   priceElementsArray      = Array.from(document.querySelectorAll(".product-price"));
 
 const PRODUCT_STORAGE_KEY = "products";
@@ -155,7 +154,7 @@ function handleLocalStorageLoad(key) {
  * @param {*} e - The event
  */
 function handleEventDelegeation(e) {
-    
+    console.log(e.target.id)
     handleQuantityChange(e)
     handleCloseIcon(e);
     handleDiscountInputField(e);
@@ -166,6 +165,7 @@ function handleEventDelegeation(e) {
     handleSaveSidebar(e);
     handleCheckoutButton(e);
     handleCVCInputField(e);
+  
    
 }
 
@@ -485,7 +485,7 @@ function handleCheckoutButton(e) {
     const checkoutBtnNow = "checkout-now-btn";
 
     if (e.target.id === checkoutBtnNow ) {
-      
+        handleSyncCartWithLocalStorage();
         dimBackground(true);
         paymentSection.classList.add("show");
         checkoutTimer.classList.add("d-none");
@@ -554,6 +554,7 @@ function handleDiscountApplyBtn(e) {
 }
 
 
+
 function handleCVCInputField(e) {
     
     const cvcInputFieldID = "cvc";
@@ -579,6 +580,7 @@ function validatePageElements() {
     if (!checkIfHTMLElement(paymentSection, "The payment section element")) return;
     if (!checkIfHTMLElement(paymentSectionCloseIcon, "The payment section close Icon element")) return;
     if (!checkIfHTMLElement(cartSummaryCard, "Card Summary card")) return;
+
     
 }
 

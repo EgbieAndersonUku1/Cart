@@ -643,6 +643,30 @@ img:hover {
     bottom: 50%;
 }
 
+
+.spinner2,
+.spinner {
+     /* position */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: 50%;
+    bottom: 50%;
+}
+
+.spinner2 {
+    display: none;
+    width: 100px;
+    height: 100px;
+    border: 8px solid #f3f3f3;      /* Light grey */
+    border-top: 8px solid #3498db;  /* Blue */
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+
+   
+   
+}
+
 /* Keyframes for spin animation */
 @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -860,7 +884,8 @@ img:hover {
 }
 
 /* The section for the gateway payment */
-#gateway-payment  {
+#gateway-payment,
+#order-confirmation  {
     width: 75%;
     border: 2px solid lavender;
     padding: var(--padding-xl);
@@ -879,6 +904,9 @@ img:hover {
     display: block;
 }
 
+#order-confirmation.show {
+    display: block;
+}
 
 #gateway-form .form-container {
     display: grid;
@@ -1001,6 +1029,13 @@ input::placeholder {
     grid-template-rows: auto;
 }
 
+.tripleColumn25_25_50 {
+    display: grid;
+    grid-template-columns: 25% 25% 50%;
+    grid-template-rows: auto;
+    /* column-gap: 5px; */
+}
+
 
 #dim {
     position: fixed;  
@@ -1013,19 +1048,3 @@ input::placeholder {
     display: none;
 }
 
-
-#order-confirmation{
-    width: 75%;
-    border: 2px solid lavender;
-    padding: var(--padding-xl);
-    margin: auto;
-    position: fixed;
-    top: 2px;
-    z-index: 10000;
-    background: white;
-    left: 200px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    transition: linear 2s ease-in-out;
-    /* display: none; */
-   
-}

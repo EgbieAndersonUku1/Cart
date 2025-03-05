@@ -39,12 +39,14 @@ export const cardsContainer = {
 export function createOrdersDiv(orders) {
     
     ordersDiv.classList.add("order", "padding-bottom-sm");
-    
+    let total = 0;
+
     orders.forEach((order) => {
 
         try {
-            const orderDiv = createOrderDiv(order);
-            ordersDiv.appendChild(orderDiv);
+            const orderDetails = createOrderDiv(order);
+            ordersDiv.appendChild(orderDetails.orderDiv);
+            total += orderDetails.totalOrder
 
         } catch (error) {
             console.warn(error);
@@ -52,7 +54,7 @@ export function createOrdersDiv(orders) {
     
     })
 
-    return ordersDiv;
+    return total;
 }
 
 
@@ -78,9 +80,11 @@ function createOrderDiv(order) {
         "currentQty" : "Quantity purchased : ",
         "productIDName" : "Product ID: ",
         "productName" : "Product name",
-        "currentPrice" : "Price",
+        "currentPrice" : "Price: ",
         "selectorID" : '',
     }
+    
+    let totalOrder = 0;
 
     // create ul and ol 
     for (const key in order) {
@@ -91,18 +95,19 @@ function createOrderDiv(order) {
         let textNode;
 
         spanElement.className   = "medium-bold"
-        spanElement.textContent =  PRODUCT_KEY_MAPPING[key];
-
-        liElement.appendChild(spanElement)
+        spanElement.textContent = PRODUCT_KEY_MAPPING.hasOwnProperty(key) ? PRODUCT_KEY_MAPPING[key] : "Key not found";  
+        totalOrder              = getTotal(order.currentQty, order.currentPrice.slice(1));
         
+  
+        liElement.appendChild(spanElement)
+    
         if (key !== "selectorID") {
            
             if (key === PRODUCT_ID) {
-            
                 textNode = document.createTextNode(value ? ` ${value}  `: ulID);
-
+            } else if (key === "currentPrice" ){
+                textNode = document.createTextNode(value ? ` ${order.currentQty} x ${value} = £${totalOrder}`: `${key} is not found`);
             } else {
-          
                 textNode = document.createTextNode(value ? ` ${value} `: `${key} is not found`);
             }
 
@@ -113,8 +118,7 @@ function createOrderDiv(order) {
 
     };
     orderDiv.appendChild(ulElement);
-    return orderDiv;
-
+    return {orderDiv: orderDiv, totalOrder: totalOrder};
 
 }
 
@@ -206,4 +210,13 @@ function createPTag(key, value) {
     pTag.appendChild(textNode);
 
     return pTag;
+}
+
+
+function getTotal(number1, number2) {
+    
+    if (!Number.isInteger(parseInt(number1)) || !Number.isInteger(parseInt(number2)) ) {
+        return null;
+    }
+    return parseFloat(number1) * parseFloat(number2)
 }

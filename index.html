@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/css.css">
     <link rel="shortcut icon" href="static/images/cart.svg" type="image/x-icon">
-    <meta name="description" content="Review your selected items, update quantities, and proceed to checkout securely. Enjoy a seamless shopping experience with easy cart management." />
+    <meta name="description"
+        content="Review your selected items, update quantities, and proceed to checkout securely. Enjoy a seamless shopping experience with easy cart management." />
 
     <title>Cart</title>
 </head>
@@ -50,19 +51,23 @@
                 <div class="footer">
                     <div class="row flex-space-evenly">
                         <a href="#" aria-label="View orders and sign in">Orders and Sign In
-                            <img src="static/images/user (1).svg" alt="user icon" class="nav-icon" loading="lazy"  aria-hidden="true">
+                            <img src="static/images/user (1).svg" alt="user icon" class="nav-icon" loading="lazy"
+                                aria-hidden="true">
                         </a>
                         <a href="#" aria-label="View wishlist with 4 items">Wishlist
-                            <img src="static/images/heart.svg" alt="wishlist icon" loading="lazy"  class="nav-icon" aria-hidden="true">
+                            <img src="static/images/heart.svg" alt="wishlist icon" loading="lazy" class="nav-icon"
+                                aria-hidden="true">
                             <span class="nav-quantity wishlist-quantity">4</span>
                         </a>
                         <a href="#" aria-label="View cart with 1 item">Cart
-                            <img src="static/images/cart.svg" alt="cart icon" loading="lazy"  class="nav-icon" aria-hidden="true">
+                            <img src="static/images/cart.svg" alt="cart icon" loading="lazy" class="nav-icon"
+                                aria-hidden="true">
                             <span class="nav-quantity cart-quantity" id="icon-cart-quantity">0</span>
                         </a>
 
                         <a href="#" aria-label="View cart with 1 item" id="save">save
-                            <img src="static/images/save-black.svg" alt="save icon" loading="lazy"  class="nav-icon" aria-hidden="true">
+                            <img src="static/images/save-black.svg" alt="save icon" loading="lazy" class="nav-icon"
+                                aria-hidden="true">
                             <span class="nav-quantity save-quantity" id="save-quantity">0</span>
                         </a>
                     </div>
@@ -128,7 +133,8 @@
                 <div class="reward">
 
                     <div class="head">
-                        <img src="static/images/credit-cards.jpg" alt="Various credit cards" class="cart-image" loading="lazy" >
+                        <img src="static/images/credit-cards.jpg" alt="Various credit cards" class="cart-image"
+                            loading="lazy">
                     </div>
 
                     <div class="body">
@@ -161,285 +167,286 @@
                         <div class="quantity">
                             <div class="decrease box" role="button" aria-label="Decrease quantity" tabindex="0">
                                 <img src="static/images/subtract-circle-minus-remove.svg" alt="Decrease quantity"
-                                    data-productID="product1-qty"
-                                    data-productName="PureStride White Trainers"
+                                    data-productID="product1-qty" data-productName="PureStride White Trainers"
                                     data-productDescr="Step out in style with these classic white trainers, designed for both comfort and versatility..."
-                                    data-currentPrice="£100"
-                                    class="quantity-icon decrease-quantity clickable-icon"
-                                    loading="lazy" 
-                                    >
+                                    data-currentPrice="£100" class="quantity-icon decrease-quantity clickable-icon"
+                                    loading="lazy">
                             </div>
                             <div class="number box bold" aria-live="polite" id="product1-qty">1</div>
 
                             <div class="increase box" role="button" aria-label="Increase quantity" tabindex="0">
-                                
-                                <img src="static/images/plus-circle.svg" alt="Increase quantity" data-productID="product1-qty"
-                                    data-productName="PureStride White Trainers"
+
+                                <img src="static/images/plus-circle.svg" alt="Increase quantity"
+                                    data-productID="product1-qty" data-productName="PureStride White Trainers"
                                     data-productDescr="Step out in style with these classic white trainers, designed for both comfort and versatility..."
-                                    data-currentPrice="£100"
-                                    loading="lazy" 
+                                    data-currentPrice="£100" loading="lazy"
                                     class="quantity-icon increase-quantity clickable-icon"">
                             </div>
 
                         </div>
 
                         <!-- price -->
-                        <div class="price">
-                            <p class="red small-heading">
-                                <span aria-hidden="true" aria-live="polite" aria-relevant="text" id="product1-price" class="product-price">£100</span>
-                                <span class="sr-only" aria-label="Price: 100 pounds">Price: <span id="product1-price-span">£100</span></span>
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <hr>
-
-                    <!-- The card/product body -->
-                    <div class="body">
-
-                        <!-- image -->
-                        <div class="image">
-                            <img src="static/images/p1.jpg.webp" alt="product image" class="cart-product-image" loading="lazy" >
-                        </div>
-
-                        <!-- product description -->
-                        <div class="product-description">
-                            <p class="product-name small-heading">PureStride White Trainers</p>
-
-                            <p class="padding-top">
-                                Step out in style with these classic white trainers, designed for both comfort and
-                                versatility.
-                                Featuring a sleek, minimalist design, they pair effortlessly with any outfit, whether
-                                you're dressing
-                                up or keeping it casual. Made from durable materials with a cushioned sole for all-day
-                                support,
-                                these trainers are perfect for everyday wear.
-                            </p>
-
-                            <p class="padding-top bold underline padding-bottom-sm" aria-label="Shipping method">Ship
-                                only</p>
-
-                            <div aria-live="polite">
-                                <p>
-                                    <span class="bold">Info:</span> <span id="stock-status">In stock and ready to
-                                        ship</span>
+                        <div class=" price">
+                                <p class="red small-heading">
+                                    <span aria-hidden="true" aria-live="polite" aria-relevant="text" id="product1-price"
+                                        class="product-price">£100</span>
+                                    <span class="sr-only" aria-label="Price: 100 pounds">Price: <span
+                                            id="product1-price-span">£100</span></span>
                                 </p>
                             </div>
 
-                            <p><span class="bold">Shipping:</span> Standard</p>
-                            <p><span class="bold">Arrival:</span> Arrives in 6 to 7 working days</p>
-
                         </div>
 
-                        <!-- activity e.g remove/add -->
-                        <div class="activity">
-                            <div class="remove box" aria-label="Remove item from cart">
-                                <img src="static/images/x-letter.svg" alt="Remove icon" 
-                                loading="lazy" aria-hidden="true" data-removeDivId="product1-div" class="clickable-icon">
-                               
-                            </div>
+                        <hr>
 
-                            <div class="save-to-later box" aria-label="Save item for later">
-                                <img src="static/images/save.svg" alt="Save icon" aria-hidden="true" class="clickable-icon save-img-icon" loading="lazy" 
-                                    data-productName="PureStride White Trainers"
-                                    data-productDescr="Step out in style with these classic white trainers, designed for both comfort and
-                                    versatility...."
-                                    data-productID="product1-qty"
-                                    data-currentPrice="£100"
-                                    data-removeDivId="product1-div"
-                                    >
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        <!-- The card/product body -->
+                        <div class="body">
 
-                <div class="product" id="product2-div">
-
-                    <div class="head">
-                        <div class="product-name">
-                            <h1 class="green" id="product2">UrbanFlex Classic Sneakers</h1>
-                            <small><span class="upperCase bold" aria-label="Stock Keeping Unit">SKU:</span>
-                                BTESSWEFSXEE</small>
-                        </div>
-
-                        <div class="quantity">
-                            <div class="decrease box" aria-label="Decrease quantity" >
-                                <img src="static/images/subtract-circle-minus-remove.svg" alt="decrease item icon" class="quantity-icon decrease-quantity clickable-icon"
-                                    data-productName="UrbanFlex Classic Sneakers"
-                                    data-productDescr="These crisp white trainers are the perfect blend of style and comfort...."
-                                    data-productID="product2-qty"
-                                    data-currentPrice="£120"
-                                    aria-hidden="true"
+                            <!-- image -->
+                            <div class="image">
+                                <img src="static/images/p1.jpg.webp" alt="product image" class="cart-product-image"
                                     loading="lazy">
                             </div>
 
-                            <div class="number box bold" aria-live="polite" id="product2-qty">1</div>
+                            <!-- product description -->
+                            <div class="product-description">
+                                <p class="product-name small-heading">PureStride White Trainers</p>
 
-                            <div class="increase box" aria-label="Decrease quantity" tabindex="0">
-                                <img src="static/images/plus-circle.svg" alt="Decrease quantity" class="quantity-icon increase-quantity clickable-icon" 
-                                    data-productName="UrbanFlex Classic Sneakers"
-                                    data-productDescr="These crisp white trainers are the perfect blend of style and comfort...."
-                                    data-productID="product2-qty"
-                                    data-currentPrice="£120"
-                                    aria-hidden="true"
-                                    loading="lazy">
+                                <p class="padding-top">
+                                    Step out in style with these classic white trainers, designed for both comfort and
+                                    versatility.
+                                    Featuring a sleek, minimalist design, they pair effortlessly with any outfit,
+                                    whether
+                                    you're dressing
+                                    up or keeping it casual. Made from durable materials with a cushioned sole for
+                                    all-day
+                                    support,
+                                    these trainers are perfect for everyday wear.
+                                </p>
+
+                                <p class="padding-top bold underline padding-bottom-sm" aria-label="Shipping method">
+                                    Ship
+                                    only</p>
+
+                                <div aria-live="polite">
+                                    <p>
+                                        <span class="bold">Info:</span> <span id="stock-status">In stock and ready to
+                                            ship</span>
+                                    </p>
+                                </div>
+
+                                <p><span class="bold">Shipping:</span> Standard</p>
+                                <p><span class="bold">Arrival:</span> Arrives in 6 to 7 working days</p>
+
                             </div>
-                        </div>
 
-                        <div class="price">
-                            <p class="red small-heading">
-                                <span aria-hidden="true" aria-live="polite" aria-relevant="text" id="product2-price" class="product-price">£120</span>
-                                <span class="sr-only" aria-label="Price: 100 pounds">Price: £120</span>
-                            </p>
+                            <!-- activity e.g remove/add -->
+                            <div class="activity">
+                                <div class="remove box" aria-label="Remove item from cart">
+                                    <img src="static/images/x-letter.svg" alt="Remove icon" loading="lazy"
+                                        aria-hidden="true" data-removeDivId="product1-div" class="clickable-icon">
+
+                                </div>
+
+                                <div class="save-to-later box" aria-label="Save item for later">
+                                    <img src="static/images/save.svg" alt="Save icon" aria-hidden="true"
+                                        class="clickable-icon save-img-icon" loading="lazy"
+                                        data-productName="PureStride White Trainers" data-productDescr="Step out in style with these classic white trainers, designed for both comfort and
+                                    versatility...." data-productID="product1-qty" data-currentPrice="£100"
+                                        data-removeDivId="product1-div">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <hr>
 
-                    <div class="body">
+                    <div class="product" id="product2-div">
 
-                        <div class="image">
-                            <img src="static/images/p2.jpg.webp"
-                                loading="lazy" 
-                                alt="UrbanFlex Classic Sneakers - White trainers with a cushioned sole"
-                                class="cart-product-image">
-                        </div>
-
-                        <div class="product-description" aria-labelledby="product-name">
-                            <p id="product-name" class="product-name heading-2">UrbanFlex Classic Sneakers</p>
-
-                            <p class="padding-top">These crisp white trainers are the perfect blend of style and
-                                comfort.
-                                With a lightweight design, breathable material, and a cushioned sole, they offer all-day
-                                support
-                                whether you're on the move or keeping it casual. A timeless essential for any wardrobe.
-                            </p>
-
-                            <p class="padding-top bold underline padding-bottom-sm">Ship only</p>
-                            <p><span class="bold">Info: </span> In stock and ready to ship</p>
-                            <p><span class="bold">Shipping: </span> Standard</p>
-                            <p><span class="bold">Arrival: </span> Arrives in 6 to 7 working days</p>
-                        </div>
-
-                        <div class="activity">
-                            <div class="remove box">
-                                <img src="static/images/x-letter.svg" alt="remove icon" loading="lazy" data-removeDivId="product2-div" class="clickable-icon">
+                        <div class="head">
+                            <div class="product-name">
+                                <h1 class="green" id="product2">UrbanFlex Classic Sneakers</h1>
+                                <small><span class="upperCase bold" aria-label="Stock Keeping Unit">SKU:</span>
+                                    BTESSWEFSXEE</small>
                             </div>
 
-                            <div class="save-to-later box">
-                                <img src="static/images/save.svg" alt="save image icon" class="clickable-icon save-img-icon" loading="lazy"  
-                                    data-productName="UrbanFlex Classic Sneakers"
-                                    data-productDescr="These crisp white trainers are the perfect blend of style and comfort...."
-                                    data-productID="product2-qty"
-                                    data-currentPrice="£120"
-                                    data-removeDivId="product2-div"
-                                    >
-                                
+                            <div class="quantity">
+                                <div class="decrease box" aria-label="Decrease quantity">
+                                    <img src="static/images/subtract-circle-minus-remove.svg" alt="decrease item icon"
+                                        class="quantity-icon decrease-quantity clickable-icon"
+                                        data-productName="UrbanFlex Classic Sneakers"
+                                        data-productDescr="These crisp white trainers are the perfect blend of style and comfort...."
+                                        data-productID="product2-qty" data-currentPrice="£120" aria-hidden="true"
+                                        loading="lazy">
+                                </div>
+
+                                <div class="number box bold" aria-live="polite" id="product2-qty">1</div>
+
+                                <div class="increase box" aria-label="Decrease quantity" tabindex="0">
+                                    <img src="static/images/plus-circle.svg" alt="Decrease quantity"
+                                        class="quantity-icon increase-quantity clickable-icon"
+                                        data-productName="UrbanFlex Classic Sneakers"
+                                        data-productDescr="These crisp white trainers are the perfect blend of style and comfort...."
+                                        data-productID="product2-qty" data-currentPrice="£120" aria-hidden="true"
+                                        loading="lazy">
+                                </div>
+                            </div>
+
+                            <div class="price">
+                                <p class="red small-heading">
+                                    <span aria-hidden="true" aria-live="polite" aria-relevant="text" id="product2-price"
+                                        class="product-price">£120</span>
+                                    <span class="sr-only" aria-label="Price: 100 pounds">Price: £120</span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="body">
+
+                            <div class="image">
+                                <img src="static/images/p2.jpg.webp" loading="lazy"
+                                    alt="UrbanFlex Classic Sneakers - White trainers with a cushioned sole"
+                                    class="cart-product-image">
+                            </div>
+
+                            <div class="product-description" aria-labelledby="product-name">
+                                <p id="product-name" class="product-name heading-2">UrbanFlex Classic Sneakers</p>
+
+                                <p class="padding-top">These crisp white trainers are the perfect blend of style and
+                                    comfort.
+                                    With a lightweight design, breathable material, and a cushioned sole, they offer
+                                    all-day
+                                    support
+                                    whether you're on the move or keeping it casual. A timeless essential for any
+                                    wardrobe.
+                                </p>
+
+                                <p class="padding-top bold underline padding-bottom-sm">Ship only</p>
+                                <p><span class="bold">Info: </span> In stock and ready to ship</p>
+                                <p><span class="bold">Shipping: </span> Standard</p>
+                                <p><span class="bold">Arrival: </span> Arrives in 6 to 7 working days</p>
+                            </div>
+
+                            <div class="activity">
+                                <div class="remove box">
+                                    <img src="static/images/x-letter.svg" alt="remove icon" loading="lazy"
+                                        data-removeDivId="product2-div" class="clickable-icon">
+                                </div>
+
+                                <div class="save-to-later box">
+                                    <img src="static/images/save.svg" alt="save image icon"
+                                        class="clickable-icon save-img-icon" loading="lazy"
+                                        data-productName="UrbanFlex Classic Sneakers"
+                                        data-productDescr="These crisp white trainers are the perfect blend of style and comfort...."
+                                        data-productID="product2-qty" data-currentPrice="£120"
+                                        data-removeDivId="product2-div">
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- the side cart item e.g price, tax -->
-            <div class="cart-summary" id="cart-summary">
+                <!-- the side cart item e.g price, tax -->
+                <div class="cart-summary" id="cart-summary">
 
-                <div class="cart-container">
-                    <h1><span><img src="static/images/lock.svg" alt="A image of a lock" class="cart-icon" loading="lazy"></span> Cart
-                        Summary </h1>
-                    <dl class="cost-breakdown">
-                        <dt>Mechanise</dt>
-                        <dd class="price" id="price-total">£220.00</dd>
-                    </dl>
+                    <div class="cart-container">
+                        <h1><span><img src="static/images/lock.svg" alt="A image of a lock" class="cart-icon"
+                                    loading="lazy"></span> Cart
+                            Summary </h1>
+                        <dl class="cost-breakdown">
+                            <dt>Mechanise</dt>
+                            <dd class="price" id="price-total">£220.00</dd>
+                        </dl>
 
-                    <dl class="cost-breakdown">
-                        <dt>Est. Shipping and Handling</dt>
-                        <dd class="price" id="shipping-and-handling">£25.00</dd>
-                    </dl>
+                        <dl class="cost-breakdown">
+                            <dt>Est. Shipping and Handling</dt>
+                            <dd class="price" id="shipping-and-handling">£25.00</dd>
+                        </dl>
 
-                    <dl class="cost-breakdown">
-                        <dt class="red">Shipping discount</dt>
-                        <dd class="price red bold">-£25.00</dd>
-                    </dl>
+                        <dl class="cost-breakdown">
+                            <dt class="red">Shipping discount</dt>
+                            <dd class="price red bold">-£25.00</dd>
+                        </dl>
 
-                    <dl class="cost-breakdown">
-                        <dt>Est. Tax</dt>
-                        <dd class="price" id="price-tax">£25.00</dd>
-                    </dl>
+                        <dl class="cost-breakdown">
+                            <dt>Est. Tax</dt>
+                            <dd class="price" id="price-tax">£25.00</dd>
+                        </dl>
 
-                    <div class="cost-breakdown">
-                        <small class="red">Estimated Tax for #25488</small>
+                        <div class="cost-breakdown">
+                            <small class="red">Estimated Tax for #25488</small>
+
+                        </div>
+                        <hr class="dividor">
+
+                        <dl class="cost-breakdown">
+                            <dt class="bold">Estimated Order total</dt>
+                            <dd class="price" id="order-total">£0.00</dd>
+                        </dl>
+
+                        <hr class="dividor">
+
+                        <div class="apply-form">
+                            <form action="" method="post" id="apply-form">
+
+                                <label for="apply-input" class="apply-promotion capitalize bold padding-bottom-sm">
+                                    Apply a promotion code
+                                </label>
+                                <p class="padding-bottom-sm">Remove any spaces before hitting apply</p>
+
+                                <div class="discount-field twoColumnGrid75_25">
+                                    <input type="text" name="discountCode" id="apply-input" maxlength="23"
+                                        placeholder="discount code">
+                                    <button type="button" class="upperCase" id="apply-btn">Apply</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+
+                        <button class="button-lg upperCase black" id="checkout-now-btn">Checkout Now</button>
+
+                        <small class="center">By continuing to checkout you are agreeing to our <a href="#"
+                                class="capitalize underline">terms of use</a>
+                            and <a href="#" class="capitalize underline">Privacy Policy</a></small>
+
+
+                        <hr class="dividor">
+
+                        <p class="center">Or use another checkout method</p>
+                        <div class="paypal-btn">
+
+                            <!-- PayPal Logo -->
+                            <table border="0" cellpadding="10" cellspacing="0" align="center"
+                                class="paypal-button-table-link">
+                                <tr>
+                                    <td align="center"></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <a href="https://www.paypal.com/uk/webapps/mpp/paypal-popup"
+                                            title="How PayPal Works"
+                                            onclick="javascript:window.open('https://www.paypal.com/uk/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;">
+                                            <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png"
+                                                loading="lazy" border="0" alt="PayPal Logo"></a>
+                                    </td>
+                                </tr>
+                            </table><!-- PayPal Logo -->
+                        </div>
 
                     </div>
-                    <hr class="dividor">
 
-                    <dl class="cost-breakdown">
-                        <dt class="bold">Estimated Order total</dt>
-                        <dd class="price" id="order-total">£0.00</dd>
-                    </dl>
-
-                    <hr class="dividor">
-
-                    <div class="apply-form">
-                        <form action="" method="post" id="apply-form">
-
-                            <label for="apply-input" class="apply-promotion capitalize bold padding-bottom-sm">
-                                Apply a promotion code
-                            </label>
-                            <p class="padding-bottom-sm">Remove any spaces before hitting apply</p>
-
-                            <div class="discount-field twoColumnGrid75_25">
-                                <input type="text" name="discountCode" id="apply-input" maxlength="23" placeholder="discount code">
-                                <button type="button" class="upperCase" id="apply-btn">Apply</button>
-                            </div>
-                          
-                        </form>
-                    </div>
-
-                  
-                    <button class="button-lg upperCase black" id="checkout-now-btn">Checkout Now</button>
-                    
-                    <small class="center">By continuing to checkout you are agreeing to our <a href="#"
-                            class="capitalize underline">terms of use</a>
-                        and <a href="#" class="capitalize underline">Privacy Policy</a></small>
-
-
-                    <hr class="dividor">
-
-                    <p class="center">Or use another checkout method</p>
-                    <div class="paypal-btn">
-
-                        <!-- PayPal Logo -->
-                        <table border="0" cellpadding="10" cellspacing="0" align="center"
-                            class="paypal-button-table-link">
-                            <tr>
-                                <td align="center"></td>
-                            </tr>
-                            <tr>
-                                <td align="center">
-                                    <a href="https://www.paypal.com/uk/webapps/mpp/paypal-popup"
-                                        title="How PayPal Works"
-                                        onclick="javascript:window.open('https://www.paypal.com/uk/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;">
-                                        <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png"
-                                            loading="lazy" 
-                                            border="0" alt="PayPal Logo"></a>
-                                </td>
-                            </tr>
-                        </table><!-- PayPal Logo -->
-                    </div>
-
+                    <small class="capitalize padding-top">shipping intenationally</small>
                 </div>
 
-                <small class="capitalize padding-top">shipping intenationally</small>
             </div>
-
-        </div>
 
         </div>
     </section>
 
     <section id="gift-info">
-        <small><span><img src="static/images/gift.svg" alt="gift icon" class="icon" loading="lazy"></span>If this order contains a gift,
+        <small><span><img src="static/images/gift.svg" alt="gift icon" class="icon" loading="lazy"></span>If this order
+            contains a gift,
             you will be added to a gift message and a gift box for the eligible item
             <a href="#" class="bold red underline">Click here for details</a>
         </small>
@@ -454,12 +461,18 @@
 
             <div class="likeable-images">
 
-                <img src="static/images/p3.jpg.webp" alt="likable product image"  class="likable-product-image" loading="lazy">
-                <img src="static/images/p4.jpg.webp" alt="likable product image"  class="likable-product-image" loading="lazy">
-                <img src="static/images/p5.jpg.webp" alt="likable product image"  class="likable-product-image" loading="lazy">
-                <img src="static/images/p6.jpg.webp" alt="likable product image"  class="likable-product-image" loading="lazy">
-                <img src="static/images/p7.jpg.webp" alt="likable product image"  class="likable-product-image" loading="lazy">
-                <img src="static/images/p8.jpg.webp" alt="likable product image"  class="likable-product-image" loading="lazy" >
+                <img src="static/images/p3.jpg.webp" alt="likable product image" class="likable-product-image"
+                    loading="lazy">
+                <img src="static/images/p4.jpg.webp" alt="likable product image" class="likable-product-image"
+                    loading="lazy">
+                <img src="static/images/p5.jpg.webp" alt="likable product image" class="likable-product-image"
+                    loading="lazy">
+                <img src="static/images/p6.jpg.webp" alt="likable product image" class="likable-product-image"
+                    loading="lazy">
+                <img src="static/images/p7.jpg.webp" alt="likable product image" class="likable-product-image"
+                    loading="lazy">
+                <img src="static/images/p8.jpg.webp" alt="likable product image" class="likable-product-image"
+                    loading="lazy">
 
             </div>
 
@@ -513,7 +526,8 @@
         <div class="save-container">
 
             <div class="close flex-end">
-                <img src="static/images/window-close.svg" alt="The close window icon" class="icon hide" id="window-icon">
+                <img src="static/images/window-close.svg" alt="The close window icon" class="icon hide"
+                    id="window-icon">
             </div>
 
             <div class="header center">
@@ -526,7 +540,7 @@
                 </div>
                 <div class="cards">
 
-                  
+
                 </div>
 
             </div>
@@ -553,28 +567,29 @@
             <p class="time-colon">:</p>
             <p class="seconds"></p>
         </div>
-        
-        
+
+
     </div>
 
 
     <section id="gateway-payment">
+        <div class="spinner2"></div>
         <div id="close-geteway" class="flex-end">
             <img src="static/images/window-close.svg" alt="Close" class="icon" id="payment-img-close-icon">
         </div>
         <div class="wrapper">
             <p class="center red display" id="gateway-error">One or more of the fields are incorrect</p>
             <p class="center red padding-bottom-lg ">This is a demo. Please do not enter real credit card details.</p>
-         
 
-            <form action="" id="gateway-form">
-                
+
+            <form action="" id="gateway-form" method="post" role="form">
+
                 <div class="form-container">
-    
+
                     <div id="payment-address">
                         <h3 class="upperCase">Billing address</h3>
 
-                        <div class="form-group">
+                        <div class="tripleColumn25_25_50">
 
                             <div class="group">
                                 <label for="full-name"><span class="light-bold">Title*:</span></label>
@@ -583,47 +598,66 @@
                                     <option value="Mr">Mr</option>
                                     <option value="Mrs">Mrs</option>
                                     <option value="Miss">Miss</option>
+                                    <option value="Dr">Dr</option>
+                                    <option value="Prof">Prof</option>
+                                    <option value="Other">Other</option>
                                 </select>
-                                
+
+                            </div>
+
+                            <div class="group">
+                                <label for="suffix"><span class="light-bold">Suffix*:</span></label>
+                                <select name="suffix" id="suffix" aria-label="suffix" class="select-field" required>
+                                    <option value="None">None</option>
+                                    <option value="Jr">Jr.</option>
+                                    <option value="Sr">Sr.</option>
+                                    <option value="III">III</option>
+                                    <option value="PhD">PhD</option>
+                                </select>
                             </div>
 
                             <div class="group">
                                 <label for="full-name"><span class="light-bold">Full name*:</span></label>
-                                <input type="text" name="full-name" id="full-name" aria-label="Full name" required placeholder="Full name.." maxlength="30">
+                                <input type="text" name="full-name" id="full-name" aria-label="Full name" required
+                                    placeholder="Full name.." maxlength="30">
                             </div>
 
                         </div>
-                     
-            
+
+
                         <label for="email"><span class="light-bold">Email*:</span></label>
-                        <input type="email" name="email" id="email" aria-label="Email address" required placeholder="Email..." maxlength="30">
-            
+                        <input type="email" name="email" id="email" aria-label="Email address" required
+                            placeholder="Email..." maxlength="30">
+
                         <label for="address"><span class="light-bold">Address 1*:</span></label>
-                        <input type="text" name="address" id="address" aria-label="Street address" required maxlength="100" placeholder="Enter address..."> 
+                        <input type="text" name="address" id="address" aria-label="Street address" required
+                            maxlength="100" placeholder="Enter address...">
 
                         <label for="address"><span class="light-bold">Address 2:</span></label>
-                        <input type="text" name="address2" id="address" aria-label="Street address" maxlength="100" placeholder="Enter address 2..."> 
-            
+                        <input type="text" name="address2" id="address2" aria-label="Street address" maxlength="100"
+                            placeholder="Enter address 2...">
+
                         <label for="city"><span class="light-bold">City*:</span></label>
-                        <input type="text" name="city" id="city" aria-label="City" required placeholder="Enter your city here..." maxlength="50">
-            
+                        <input type="text" name="city" id="city" aria-label="City" required
+                            placeholder="Enter your city here..." maxlength="50">
+
                         <div class="form-group">
-    
+
                             <div class="group">
                                 <label for="state"><span class="light-bold">State*:</span></label>
-                                <input type="text" name="state" id="state" aria-label="State" required placeholder="Enter your state..." maxlength="20">
+                                <input type="text" name="state" id="state" aria-label="State" required
+                                    placeholder="Enter your state..." maxlength="20">
                             </div>
-                            
+
                             <div class="group">
                                 <label for="zip"><span class="light-bold">ZIP Code*:</span></label>
-                                <input type="text" name="zip" 
-                                        id="zip" aria-label="ZIP Code" 
-                                        required placeholder="e.g N1 455..." maxlength="6" class="center upperCase">
+                                <input type="text" name="zip" id="zip" aria-label="ZIP Code" required
+                                    placeholder="e.g N1 455..." minlength="5" maxlength="6" class="center upperCase">
                             </div>
-                            
+
                         </div>
                     </div>
-            
+
                     <div id="payment">
                         <h3 class="upperCase">Payment</h3>
                         <div id="accepted-cards">
@@ -633,20 +667,15 @@
                             <img src="static/images/american-express.svg" alt="American Express" class="form-icon icon">
                             <img src="static/images/discover.svg" alt="Discover" class="form-icon icon">
                         </div>
-            
+
                         <label for="name-on-card"><span class="light-bold">Name on Card*:</span></label>
-                        <input type="text" name="name-on-card" id="name-on-card" aria-label="Name as it appears on card" required placeholder="Name on card e.g John Smith...">
-            
+                        <input type="text" name="name-on-card" id="name-on-card" aria-label="Name as it appears on card"
+                            required placeholder="Name on card e.g John Smith...">
+
                         <label for="credit-card-no"><span class="light-bold">Credit Card Number*:</span></label>
-                        <input type="text" name="credit-card-no"
-                             id="credit-card-no" 
-                             aria-label="Credit Card Number"
-                             required 
-                             maxlength="19" 
-                             minlength="19"
-                             placeholder="e.g. 1234-5678-1234-0000"
-                             >
-            
+                        <input type="text" name="credit-card-no" id="credit-card-no" aria-label="Credit Card Number"
+                            required maxlength="19" minlength="19" placeholder="e.g. 1234-5678-1234-0000">
+
                         <label for="expiry-month"><span class="light-bold">Expiry Month*:</span></label>
                         <select name="expiry-month" id="expiry-month" aria-label="Expiry Month" class="select-field">
                             <option value="january">January</option>
@@ -662,12 +691,13 @@
                             <option value="november">November</option>
                             <option value="december">December</option>
                         </select>
-            
+
                         <div class="form-group">
-    
+
                             <div class="group">
                                 <label for="expire-year"><span class="light-bold">Expiry Year*:</span></label>
-                                <select name="expiry-year" id="expiry-year" aria-label="Expiry year" class="select-field">
+                                <select name="expiry-year" id="expiry-year" aria-label="Expiry year"
+                                    class="select-field">
                                     <option value="2025">2025</option>
                                     <option value="2026">2026</option>
                                     <option value="2027">2027</option>
@@ -680,32 +710,30 @@
                                     <option value="2034">2034</option>
                                     <option value="2035">2035</option>
                                 </select>
-                              
 
-                                
+
+
                             </div>
-                            
+
                             <div class="group">
                                 <label for="cvc"><span class="light-bold">CVC*:</span></label>
-                                <input type="text" name="cvc" id="cvc" aria-label="Card Security Code (CVC)" 
-                                pattern="\d{3}"
-                                title="CVC must be exactly 3 digits"
-                                placeholder="e.g 123"
-                                required inputmode="numeric" maxlength="3">
+                                <input type="text" name="cvc" id="cvc" aria-label="Card Security Code (CVC)"
+                                    pattern="\d{3}" title="CVC must be exactly 3 digits" placeholder="e.g 123" required
+                                    inputmode="numeric" minlength="3" maxlength="3">
                             </div>
-                         
+
                         </div>
                     </div>
-    
+
                 </div>
-            
+
                 <button type="submit" id="complete-payment-btn">Complete Payment</button>
             </form>
 
             <div class="center">
                 <small class="bold">Powered by EU technologies</small>
             </div>
-            
+
         </div>
 
     </section>
@@ -713,25 +741,31 @@
 
 
     <section id="order-confirmation">
-        <div id="close-order-confirmation" class="flex-end">
-            <img src="static/images/window-close.svg" alt="Close" class="icon" id="payment-img-close-icon">
+
+        <div class="highlight-box center">
+            <p class="red">Thank your for your order!</p>
+            <p class="red">Your order has been successfully placed for the following products:</p>
+            <p class="red">A confirmation has been sent to your email address.</p>
+            <p class="red">You may now refresh or close this page.</p>
         </div>
-        <div class="wrapper">
-            
-            <p class="order-confirmation center padding-bottom-lg" id="greeting">Thank you for your order!</p>
-            <p class="order-confirmation" id="order-number"><span class="bold">Order Number: </span>Unique identifier number here</p>
-            <p class="order-confirmation bold padding-bottom-sm" id="orders-summary">Purchased Orders</p>
+        
+        <div class="wrapper padding-bottom-lg padding-top">
+           
+            <p class="order-confirmation center padding-bottom-lg" id="order-number"><span class="bold">Order Number:
+                </span>#EU-999-911-0000</p>
+
+            <p class="order-confirmation padding-bottom-lg" id="fullname"><span class="bold">Hi, </span></p>
+            <p class="order-confirmation bold padding-bottom-md" id="orders-summary">Purchased Orders</p>
 
             <div id="orders">
-              
+                <!-- this will be dynamically generated by js -->
 
             </div>
             
-           
-            <p class="order-confirmation" id="payment-card-details"><span class="bold">Card details: </span>Card details here </p>
-            <p class="order-confirmation" id="billing-address"><span class="bold">Billing address </span>Billing address here</p>
-            <p class="order-confirmation" id="delivery-date"><span class="bold">Delivery date </span>Delivery date here</p>
-            <p class="order-confirmation" id="tracking-link"><span class="bold">Tracking link </span>Tracking link here</p>
+            <p class="order-confirmation" id="total-order-cost"><span class="bold">Total order cost: </span></p>
+            <p class="order-confirmation" id="payment-card-details"><span class="bold">Card details: </span></p>
+            <p class="order-confirmation" id="billing-address"><span class="bold">Billing address: </span></p>
+            <p class="order-confirmation" id="delivery-date"><span class="bold">Delivery due date: </span></p>
         </div>
 
         <div class="center">

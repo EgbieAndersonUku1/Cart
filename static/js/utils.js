@@ -1,9 +1,6 @@
 const iconCartQuantity     = document.getElementById("icon-cart-quantity");
 const dimBackgroundElement = document.getElementById("dim");
 
-import getCartProductInfo from "./product.js";
-
-
 
 validatePageElements();
 
@@ -197,31 +194,25 @@ export function maskCreditCardNo(creditCardNo) {
         throw new Error("Invalid credit card number");
     }
 
-    const CREDIT_CARD_LENGTH = creditCardNo.length;
-
-    if (CREDIT_CARD_LENGTH !== sanitizeText(creditCardNo, true).length ) {
+    const CREDIT_CARD_LENGTH      = sanitizeText(creditCardNo, true).length;
+    const MIN_CREDIT_CARD_LENGTH  = 12;
+    const MAX_CREDIT_CARD_LENGTH  = 19;
+  
+    
+    if (CREDIT_CARD_LENGTH < MIN_CREDIT_CARD_LENGTH ) {
         throw new Error(`The credit card is invalid because it contains non-numeric values. Credit card no: ${creditCardNo}`);
     };
 
-    const creditCardLength           = CREDIT_CARD_LENGTH;
-    const MIN_CREDIT_CARD_LENGTH     = 12;
-    const MAX_CREDIT_CARD_LENGTH     = 19;
-  
-    if (creditCardLength < MIN_CREDIT_CARD_LENGTH || creditCardLength > MAX_CREDIT_CARD_LENGTH) {
+    if (CREDIT_CARD_LENGTH > MAX_CREDIT_CARD_LENGTH) {
         throw new Error("Credit card length must be: Visa, Mastercard, Discover: 16, American Express: 15, Diners Club: 14, Maestro: 12 to 19");
     }
 
-    const numberToMask   = creditCardLength - 4;
+    const numberToMask   = CREDIT_CARD_LENGTH - 4;
     const maskedNumber   = "*".repeat(numberToMask);
     const lastFourDigits = creditCardNo.slice(-4);
 
     return concatenateWithDelimiter(maskedNumber, lastFourDigits);
 };
-
-
-
-
-
 
 
 
